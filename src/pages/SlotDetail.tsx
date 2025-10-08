@@ -39,14 +39,24 @@ const SlotDetail = () => {
             >
               1WIN
             </button>
-            <Button
-              onClick={() => navigate('/')}
-              variant="outline"
-              className="border-[#374151] hover:bg-[#374151]"
-            >
-              <Icon name="ArrowLeft" size={20} className="mr-2" />
-              Назад
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button
+                onClick={() => navigate('/slots')}
+                variant="outline"
+                className="border-[#374151] hover:bg-[#374151]"
+              >
+                <Icon name="ArrowLeft" size={20} className="mr-2" />
+                Все слоты
+              </Button>
+              <Button
+                onClick={() => navigate('/')}
+                variant="outline"
+                className="border-[#374151] hover:bg-[#374151]"
+              >
+                <Icon name="Home" size={20} className="mr-2" />
+                Главная
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -123,7 +133,10 @@ const SlotDetail = () => {
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold mb-3">Особенности</h3>
+                  <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
+                    <Icon name="Sparkles" size={24} className="text-[#F59E0B]" />
+                    Особенности
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {slot.features.map((feature, index) => (
                       <Badge
@@ -138,23 +151,74 @@ const SlotDetail = () => {
                 </div>
 
                 <div className="bg-[#1F2937] p-4 rounded-lg mb-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm">Популярность</span>
-                    <span className="text-sm font-bold">
-                      {Math.min(100, Math.floor((slot.plays / 50000) * 100))}%
-                    </span>
+                  <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
+                    <Icon name="Users" size={16} />
+                    <span>Популярность</span>
                   </div>
                   <Progress
                     value={Math.min(100, Math.floor((slot.plays / 50000) * 100))}
-                    className="h-2"
+                    className="h-2 mb-2"
                   />
+                  <p className="text-xs text-gray-500">
+                    {slot.plays.toLocaleString('ru-RU')} игроков
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-semibold text-lg py-6"
+                  size="lg"
+                >
+                  <Icon name="Play" size={24} className="mr-2" />
+                  Играть сейчас
+                </Button>
+              </div>
+            </Card>
+
+            <Card className="bg-[#111827] border-[#374151] p-6 mt-8">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <Icon name="Info" size={24} className="text-[#F59E0B]" />
+                Как играть
+              </h3>
+              <div className="space-y-4 text-gray-300">
+                <div className="flex gap-3">
+                  <div className="bg-[#F59E0B] text-black font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                    1
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1">Выберите ставку</p>
+                    <p className="text-sm text-gray-400">
+                      Установите размер ставки от {slot.minBet} ₽ до {slot.maxBet.toLocaleString('ru-RU')} ₽
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <div className="bg-[#F59E0B] text-black font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                    2
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1">Запустите барабаны</p>
+                    <p className="text-sm text-gray-400">
+                      Нажмите кнопку "Крутить" или используйте автоигру
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <div className="bg-[#F59E0B] text-black font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                    3
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1">Выигрывайте!</p>
+                    <p className="text-sm text-gray-400">
+                      Собирайте выигрышные комбинации и активируйте бонусные функции
+                    </p>
+                  </div>
                 </div>
               </div>
             </Card>
 
             {relatedSlots.length > 0 && (
               <div className="mt-8">
-                <h2 className="text-2xl font-bold mb-4">Похожие игры от {slot.provider}</h2>
+                <h2 className="text-2xl font-bold mb-6">Похожие игры от {slot.provider}</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {relatedSlots.map((relatedSlot) => (
                     <Card
@@ -166,17 +230,20 @@ const SlotDetail = () => {
                         {relatedSlot.emoji}
                       </div>
                       <div className="p-3">
-                        <h4 className="font-semibold text-sm mb-1 truncate">
+                        <h4 className="font-semibold text-sm mb-2 line-clamp-2">
                           {relatedSlot.title}
                         </h4>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1 mb-2">
                           <Icon
                             name="Star"
                             size={14}
                             className="text-[#F59E0B] fill-[#F59E0B]"
                           />
-                          <span className="text-sm">{relatedSlot.rating}</span>
+                          <span className="text-sm font-semibold">{relatedSlot.rating}</span>
                         </div>
+                        <Badge className="bg-[#8B5CF6]/20 text-[#8B5CF6] text-xs">
+                          RTP {relatedSlot.rtp}%
+                        </Badge>
                       </div>
                     </Card>
                   ))}
@@ -188,16 +255,38 @@ const SlotDetail = () => {
           <div className="lg:col-span-1">
             <Card className="bg-[#111827] border-[#374151] p-6 sticky top-24">
               <h3 className="text-2xl font-bold mb-4">Начать игру</h3>
-              <Button className="w-full bg-gradient-to-r from-[#F59E0B] to-[#EF4444] hover:opacity-90 text-black font-bold text-lg py-6 mb-3">
+              <Button className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-bold text-lg py-6 mb-3">
+                <Icon name="Play" size={20} className="mr-2" />
                 Играть на деньги
               </Button>
               <Button
                 variant="outline"
-                className="w-full border-[#10B981] text-[#10B981] hover:bg-[#10B981] hover:text-black font-semibold py-6 mb-6"
+                className="w-full border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-black font-semibold py-6 mb-6"
               >
-                <Icon name="PlayCircle" size={20} className="mr-2" />
+                <Icon name="Gamepad2" size={20} className="mr-2" />
                 Демо-режим
               </Button>
+
+              <div className="border-t border-[#374151] pt-4 mb-6 space-y-3">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-400">RTP</span>
+                  <span className="font-semibold text-[#10B981]">{slot.rtp}%</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-400">Волатильность</span>
+                  <span className="font-semibold">{slot.volatility}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-400">Макс. выигрыш</span>
+                  <span className="font-semibold text-[#F59E0B]">
+                    {(slot.maxWin * 100).toLocaleString('ru-RU')} ₽
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-400">Провайдер</span>
+                  <span className="font-semibold">{slot.provider}</span>
+                </div>
+              </div>
 
               <div className="bg-[#1F2937] p-4 rounded-lg mb-4">
                 <h4 className="font-bold mb-2 flex items-center gap-2">
