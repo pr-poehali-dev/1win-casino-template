@@ -13,7 +13,6 @@ const SlotDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const slot = slots.find((s) => s.id === Number(id));
-  const [isPlaying, setIsPlaying] = useState(false);
   const [playMode, setPlayMode] = useState<'demo' | 'real'>('demo');
   const [selectedCasino, setSelectedCasino] = useState<Casino | null>(null);
 
@@ -71,216 +70,211 @@ const SlotDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Card className="bg-[#111827] border-[#374151] overflow-hidden">
-              <div className="relative bg-gradient-to-br from-[#374151] to-[#1F2937] h-96 md:h-[500px] flex items-center justify-center">
-                {!isPlaying ? (
-                  <>
+              <div className="relative bg-gradient-to-br from-[#374151] to-[#1F2937] min-h-[500px] p-8">
+                {playMode === 'demo' ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-6">
                     <div className="text-9xl animate-scale-in">{slot.emoji}</div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Button
-                        size="lg"
-                        onClick={() => setIsPlaying(true)}
-                        className="bg-[#10B981] hover:bg-[#059669] text-white font-bold px-8 py-6 text-xl"
-                      >
-                        <Icon name="Play" size={28} className="mr-3" />
-                        Запустить {playMode === 'demo' ? 'демо' : 'игру'}
-                      </Button>
-                    </div>
-                  </>
-                ) : (
-                  <div className="w-full h-full relative">
-                    {playMode === 'demo' && hasDemo(slot) ? (
-                      <iframe
-                        src={getDemoUrl(slot)!}
-                        className="w-full h-full border-0"
-                        allow="autoplay; fullscreen"
-                        title={`${slot.title} - Демо режим`}
-                      />
-                    ) : playMode === 'demo' ? (
-                      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8">
-                        <div className="text-8xl">{slot.emoji}</div>
-                        <div className="text-center">
-                          <h3 className="text-2xl font-bold mb-2">Демо временно недоступно</h3>
-                          <p className="text-gray-400 mb-6">
-                            Для этого слота демо-режим пока не доступен.<br />
-                            Попробуйте сыграть на реальные деньги.
-                          </p>
+                    <div className="text-center">
+                      <h3 className="text-3xl font-bold mb-4">Играть в демо</h3>
+                      <p className="text-gray-400 mb-6 max-w-md">
+                        {hasDemo(slot)
+                          ? 'Демо-режим откроется в новой вкладке. Играйте бесплатно!'
+                          : 'Демо-режим для этого слота пока недоступен. Попробуйте реальную игру!'}
+                      </p>
+                      <div className="flex gap-3 justify-center">
+                        {hasDemo(slot) ? (
                           <Button
-                            onClick={() => setPlayMode('real')}
-                            className="bg-[#10B981] hover:bg-[#059669] text-white"
+                            size="lg"
+                            onClick={() => window.open(getDemoUrl(slot)!, '_blank')}
+                            className="bg-[#10B981] hover:bg-[#059669] text-white font-bold px-8 py-4 text-lg"
                           >
-                            <Icon name="DollarSign" size={20} className="mr-2" />
-                            Играть на деньги
+                            <Icon name="Play" size={24} className="mr-2" />
+                            Запустить демо
                           </Button>
-                        </div>
+                        ) : null}
+                        <Button
+                          size="lg"
+                          onClick={() => setPlayMode('real')}
+                          className={hasDemo(slot) ? 'bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold px-8 py-4 text-lg' : 'bg-[#10B981] hover:bg-[#059669] text-white font-bold px-8 py-4 text-lg'}
+                        >
+                          <Icon name="DollarSign" size={24} className="mr-2" />
+                          Играть на деньги
+                        </Button>
                       </div>
-                    ) : selectedCasino ? (
-                      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8 bg-gradient-to-br from-[#1F2937] via-[#374151] to-[#1F2937]">
-                        <div className="text-8xl mb-4">{selectedCasino.logo}</div>
-                        <div className="text-center max-w-2xl">
-                          <h3 className="text-3xl font-bold mb-3">{selectedCasino.name}</h3>
-                          <div className="flex items-center justify-center gap-2 mb-6">
-                            <div className="flex gap-1">
-                              {Array.from({ length: 5 }).map((_, i) => (
-                                <Icon
-                                  key={i}
-                                  name="Star"
-                                  size={20}
-                                  className={i < Math.floor(selectedCasino.rating) ? 'fill-[#F59E0B] text-[#F59E0B]' : 'text-gray-600'}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-gray-400">({selectedCasino.rating})</span>
-                          </div>
-                          
-                          <div className="bg-[#111827]/80 rounded-xl p-6 mb-6 border-2 border-[#F59E0B]">
-                            <div className="text-[#F59E0B] font-bold text-xl mb-2">🎁 БОНУС</div>
-                            <div className="text-3xl font-bold mb-2">{selectedCasino.bonuses.welcome}</div>
-                            <div className="text-2xl text-[#10B981] font-bold mb-3">+ {selectedCasino.bonuses.freespins}</div>
-                            <p className="text-gray-300 text-sm">{selectedCasino.bonuses.description}</p>
-                            {selectedCasino.promoCode && (
-                              <div className="mt-4 bg-[#374151] rounded-lg p-3 border border-dashed border-[#F59E0B]">
-                                <div className="text-xs text-gray-400 mb-1">Промокод:</div>
-                                <div className="text-lg font-bold text-[#F59E0B]">{selectedCasino.promoCode}</div>
-                              </div>
-                            )}
-                          </div>
+                    </div>
+                  </div>
+                ) : playMode === 'real' && !selectedCasino ? (
+                  <div className="w-full max-w-5xl mx-auto">
+                    <div className="text-center mb-8">
+                      <div className="text-6xl mb-4">{slot.emoji}</div>
+                      <h3 className="text-3xl font-bold mb-2">Выберите казино</h3>
+                      <p className="text-gray-400">
+                        Получите эксклюзивные бонусы и начните выигрывать!
+                      </p>
+                    </div>
 
-                          <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div className="bg-[#111827]/60 rounded-lg p-3">
-                              <div className="text-gray-400 mb-1">Мин. депозит</div>
-                              <div className="font-bold">{selectedCasino.minDeposit}₽</div>
-                            </div>
-                            <div className="bg-[#111827]/60 rounded-lg p-3">
-                              <div className="text-gray-400 mb-1">Вывод средств</div>
-                              <div className="font-bold text-[#10B981]">{selectedCasino.withdrawalTime}</div>
-                            </div>
-                          </div>
-
-                          <div className="flex gap-3 justify-center">
-                            <Button
-                              onClick={() => window.open(`${selectedCasino.url}?promo=${selectedCasino.promoCode || ''}&game=${slot.title}`, '_blank')}
-                              size="lg"
-                              className="bg-[#10B981] hover:bg-[#059669] text-white font-bold px-8"
-                            >
-                              <Icon name="ExternalLink" size={20} className="mr-2" />
-                              Играть в {selectedCasino.name}
-                            </Button>
-                            <Button
-                              onClick={() => setSelectedCasino(null)}
-                              variant="outline"
-                              size="lg"
-                              className="border-[#374151] hover:bg-[#374151]"
-                            >
-                              <Icon name="ArrowLeft" size={20} className="mr-2" />
-                              Назад
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="w-full h-full overflow-y-auto p-8">
-                        <div className="max-w-4xl mx-auto">
-                          <div className="text-center mb-8">
-                            <div className="text-6xl mb-4">{slot.emoji}</div>
-                            <h3 className="text-3xl font-bold mb-2">Выберите казино для игры</h3>
-                            <p className="text-gray-400">
-                              Получите эксклюзивные бонусы и начните выигрывать!
-                            </p>
-                          </div>
-
-                          <div className="grid gap-4">
-                            {casinos.map((casino) => (
-                              <Card
-                                key={casino.id}
-                                className="bg-[#111827] border-[#374151] hover:border-[#F59E0B] transition-all cursor-pointer p-6"
-                                onClick={() => setSelectedCasino(casino)}
-                              >
-                                <div className="flex items-start gap-6">
-                                  <div className="text-6xl">{casino.logo}</div>
-                                  <div className="flex-1">
-                                    <div className="flex items-center justify-between mb-3">
-                                      <div>
-                                        <h4 className="text-2xl font-bold mb-1">{casino.name}</h4>
-                                        <div className="flex items-center gap-2">
-                                          <div className="flex gap-1">
-                                            {Array.from({ length: 5 }).map((_, i) => (
-                                              <Icon
-                                                key={i}
-                                                name="Star"
-                                                size={16}
-                                                className={i < Math.floor(casino.rating) ? 'fill-[#F59E0B] text-[#F59E0B]' : 'text-gray-600'}
-                                              />
-                                            ))}
-                                          </div>
-                                          <span className="text-sm text-gray-400">({casino.rating})</span>
-                                        </div>
-                                      </div>
-                                      <Badge className="bg-[#10B981] text-black font-bold text-lg px-4 py-2">
-                                        {casino.bonuses.welcome}
-                                      </Badge>
-                                    </div>
-
-                                    <div className="bg-[#1F2937] rounded-lg p-4 mb-4">
-                                      <div className="flex items-center gap-3 mb-2">
-                                        <span className="text-2xl">🎁</span>
-                                        <div>
-                                          <div className="font-bold text-[#F59E0B]">{casino.bonuses.freespins}</div>
-                                          <div className="text-sm text-gray-400">{casino.bonuses.description}</div>
-                                        </div>
-                                      </div>
-                                      {casino.promoCode && (
-                                        <div className="mt-3 flex items-center gap-2">
-                                          <Badge className="bg-[#374151] text-[#F59E0B] border border-[#F59E0B]">
-                                            Промокод: {casino.promoCode}
-                                          </Badge>
-                                        </div>
-                                      )}
-                                    </div>
-
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                      {casino.features.slice(0, 3).map((feature, idx) => (
-                                        <Badge key={idx} variant="outline" className="border-[#374151] text-gray-300">
-                                          <Icon name="Check" size={14} className="mr-1 text-[#10B981]" />
-                                          {feature}
-                                        </Badge>
+                    <div className="grid gap-4">
+                      {casinos.map((casino) => (
+                        <Card
+                          key={casino.id}
+                          className="bg-[#1F2937] border-[#374151] hover:border-[#F59E0B] transition-all cursor-pointer"
+                          onClick={() => setSelectedCasino(casino)}
+                        >
+                          <div className="flex items-center gap-6 p-6">
+                            <div className="text-6xl">{casino.logo}</div>
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <h4 className="text-2xl font-bold mb-1">{casino.name}</h4>
+                                  <div className="flex items-center gap-2">
+                                    <div className="flex gap-1">
+                                      {Array.from({ length: 5 }).map((_, i) => (
+                                        <Icon
+                                          key={i}
+                                          name="Star"
+                                          size={16}
+                                          className={i < Math.floor(casino.rating) ? 'fill-[#F59E0B] text-[#F59E0B]' : 'text-gray-600'}
+                                        />
                                       ))}
                                     </div>
-
-                                    <div className="flex items-center justify-between text-sm">
-                                      <div className="flex gap-4 text-gray-400">
-                                        <span>Мин. депозит: <span className="text-white font-semibold">{casino.minDeposit}₽</span></span>
-                                        <span>Вывод: <span className="text-[#10B981] font-semibold">{casino.withdrawalTime}</span></span>
-                                      </div>
-                                      <Button
-                                        className="bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          setSelectedCasino(casino);
-                                        }}
-                                      >
-                                        Выбрать
-                                        <Icon name="ChevronRight" size={16} className="ml-1" />
-                                      </Button>
-                                    </div>
+                                    <span className="text-sm text-gray-400">({casino.rating})</span>
                                   </div>
                                 </div>
-                              </Card>
-                            ))}
+                                <Badge className="bg-[#10B981] text-black font-bold text-lg px-4 py-2">
+                                  {casino.bonuses.welcome}
+                                </Badge>
+                              </div>
+
+                              <div className="bg-[#111827] rounded-lg p-4 mb-4">
+                                <div className="flex items-start gap-3">
+                                  <span className="text-3xl">🎁</span>
+                                  <div className="flex-1">
+                                    <div className="font-bold text-[#F59E0B] mb-1">{casino.bonuses.freespins}</div>
+                                    <div className="text-sm text-gray-400">{casino.bonuses.description}</div>
+                                    {casino.promoCode && (
+                                      <div className="mt-2">
+                                        <Badge className="bg-[#374151] text-[#F59E0B] border border-[#F59E0B]">
+                                          🎫 {casino.promoCode}
+                                        </Badge>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="flex items-center justify-between">
+                                <div className="flex gap-6 text-sm text-gray-400">
+                                  <span>Мин: <span className="text-white font-semibold">{casino.minDeposit}₽</span></span>
+                                  <span>Вывод: <span className="text-[#10B981] font-semibold">{casino.withdrawalTime}</span></span>
+                                </div>
+                                <Button
+                                  className="bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedCasino(casino);
+                                  }}
+                                >
+                                  Выбрать
+                                  <Icon name="ChevronRight" size={16} className="ml-1" />
+                                </Button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    )}
-                    <Button
-                      size="sm"
-                      onClick={() => setIsPlaying(false)}
-                      variant="outline"
-                      className="absolute top-2 right-2 z-10 bg-[#111827]/90 hover:bg-[#111827] border-[#374151]"
-                    >
-                      <Icon name="X" size={16} className="mr-1" />
-                      Закрыть
-                    </Button>
+                        </Card>
+                      ))}
+                    </div>
+
+                    <div className="text-center mt-6">
+                      <Button
+                        variant="outline"
+                        onClick={() => setPlayMode('demo')}
+                        className="border-[#374151] hover:bg-[#374151]"
+                      >
+                        <Icon name="ArrowLeft" size={20} className="mr-2" />
+                        Вернуться к демо
+                      </Button>
+                    </div>
                   </div>
-                )}
+                ) : selectedCasino ? (
+                  <div className="w-full max-w-3xl mx-auto text-center">
+                    <div className="text-8xl mb-6">{selectedCasino.logo}</div>
+                    <h3 className="text-4xl font-bold mb-3">{selectedCasino.name}</h3>
+                    <div className="flex items-center justify-center gap-2 mb-8">
+                      <div className="flex gap-1">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Icon
+                            key={i}
+                            name="Star"
+                            size={24}
+                            className={i < Math.floor(selectedCasino.rating) ? 'fill-[#F59E0B] text-[#F59E0B]' : 'text-gray-600'}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-xl text-gray-400">({selectedCasino.rating})</span>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-[#F59E0B] to-[#EF4444] rounded-2xl p-8 mb-8 shadow-2xl">
+                      <div className="text-white font-bold text-2xl mb-3">🎁 ЭКСКЛЮЗИВНЫЙ БОНУС</div>
+                      <div className="text-5xl font-black mb-3 text-white">{selectedCasino.bonuses.welcome}</div>
+                      <div className="text-4xl font-bold mb-4 text-[#111827]">+ {selectedCasino.bonuses.freespins}</div>
+                      <p className="text-lg text-white/90 mb-6">{selectedCasino.bonuses.description}</p>
+                      {selectedCasino.promoCode && (
+                        <div className="bg-white/20 backdrop-blur rounded-xl p-4 border-2 border-dashed border-white/50">
+                          <div className="text-sm text-white/80 mb-1">Промокод для активации:</div>
+                          <div className="text-3xl font-black text-white">{selectedCasino.promoCode}</div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4 mb-8">
+                      <div className="bg-[#1F2937] rounded-xl p-4 border border-[#374151]">
+                        <div className="text-gray-400 text-sm mb-2">Мин. депозит</div>
+                        <div className="text-2xl font-bold">{selectedCasino.minDeposit}₽</div>
+                      </div>
+                      <div className="bg-[#1F2937] rounded-xl p-4 border border-[#374151]">
+                        <div className="text-gray-400 text-sm mb-2">Вывод</div>
+                        <div className="text-2xl font-bold text-[#10B981]">{selectedCasino.withdrawalTime}</div>
+                      </div>
+                      <div className="bg-[#1F2937] rounded-xl p-4 border border-[#374151]">
+                        <div className="text-gray-400 text-sm mb-2">Лицензия</div>
+                        <div className="text-lg font-bold">{selectedCasino.license}</div>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#1F2937] rounded-xl p-6 mb-8 border border-[#374151]">
+                      <h4 className="text-xl font-bold mb-4">Преимущества</h4>
+                      <div className="grid grid-cols-2 gap-3 text-left">
+                        {selectedCasino.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center gap-2">
+                            <Icon name="CheckCircle" size={20} className="text-[#10B981] flex-shrink-0" />
+                            <span className="text-gray-300">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 justify-center">
+                      <Button
+                        onClick={() => window.open(`${selectedCasino.url}?promo=${selectedCasino.promoCode || ''}&game=${slot.title}`, '_blank')}
+                        size="lg"
+                        className="bg-[#10B981] hover:bg-[#059669] text-white font-bold px-10 py-6 text-xl"
+                      >
+                        <Icon name="ExternalLink" size={24} className="mr-2" />
+                        Играть в {selectedCasino.name}
+                      </Button>
+                      <Button
+                        onClick={() => setSelectedCasino(null)}
+                        variant="outline"
+                        size="lg"
+                        className="border-[#374151] hover:bg-[#374151] px-10 py-6 text-xl"
+                      >
+                        <Icon name="ArrowLeft" size={24} className="mr-2" />
+                        Назад
+                      </Button>
+                    </div>
+                  </div>
+                ) : null}
+                
                 <div className="absolute top-4 right-4 flex gap-2">
                   <Badge className="bg-[#F59E0B] text-black font-semibold">
                     RTP {slot.rtp}%
@@ -377,14 +371,6 @@ const SlotDetail = () => {
                     {slot.plays.toLocaleString('ru-RU')} игроков
                   </p>
                 </div>
-
-                <Button
-                  className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-semibold text-lg py-6"
-                  size="lg"
-                >
-                  <Icon name="Play" size={24} className="mr-2" />
-                  Играть сейчас
-                </Button>
               </div>
             </Card>
 
@@ -472,10 +458,7 @@ const SlotDetail = () => {
               
               <div className="bg-[#1F2937] p-3 rounded-lg mb-4 flex gap-2">
                 <Button
-                  onClick={() => {
-                    setPlayMode('demo');
-                    setIsPlaying(true);
-                  }}
+                  onClick={() => setPlayMode('demo')}
                   className={`flex-1 ${
                     playMode === 'demo'
                       ? 'bg-[#F59E0B] hover:bg-[#D97706] text-black'
@@ -487,10 +470,7 @@ const SlotDetail = () => {
                   Демо
                 </Button>
                 <Button
-                  onClick={() => {
-                    setPlayMode('real');
-                    setIsPlaying(true);
-                  }}
+                  onClick={() => setPlayMode('real')}
                   className={`flex-1 ${
                     playMode === 'real'
                       ? 'bg-[#10B981] hover:bg-[#059669] text-white'
@@ -502,14 +482,6 @@ const SlotDetail = () => {
                   Реальные
                 </Button>
               </div>
-
-              <Button
-                onClick={() => setIsPlaying(true)}
-                className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-bold text-lg py-6 mb-6"
-              >
-                <Icon name="Play" size={20} className="mr-2" />
-                {playMode === 'demo' ? 'Играть бесплатно' : 'Играть на деньги'}
-              </Button>
 
               <div className="border-t border-[#374151] pt-4 mb-6 space-y-3">
                 <div className="flex items-center justify-between text-sm">
