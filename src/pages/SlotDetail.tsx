@@ -8,10 +8,13 @@ import Icon from '@/components/ui/icon';
 import { slots } from '@/data/slots';
 import { getDemoUrl, hasDemo } from '@/utils/getDemoUrl';
 import { casinos, Casino } from '@/data/casinos';
+import { useLanguage } from '@/i18n/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const SlotDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const slot = slots.find((s) => s.id === Number(id));
   const [playMode, setPlayMode] = useState<'demo' | 'real'>('demo');
   const [selectedCasino, setSelectedCasino] = useState<Casino | null>(null);
@@ -52,7 +55,7 @@ const SlotDetail = () => {
               className="absolute top-4 right-4 z-10 bg-[#111827]/90 hover:bg-[#111827] border-[#374151]"
             >
               <Icon name="X" size={20} className="mr-2" />
-              Закрыть демо
+              {t.slotDetail.closeDemoButton}
             </Button>
           </div>
         </div>
@@ -74,7 +77,7 @@ const SlotDetail = () => {
                 className="border-[#374151] hover:bg-[#374151]"
               >
                 <Icon name="ArrowLeft" size={20} className="mr-2" />
-                Все слоты
+                {t.header.allSlots}
               </Button>
               <Button
                 onClick={() => navigate('/')}
@@ -82,8 +85,9 @@ const SlotDetail = () => {
                 className="border-[#374151] hover:bg-[#374151]"
               >
                 <Icon name="Home" size={20} className="mr-2" />
-                Главная
+                {t.header.main}
               </Button>
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
