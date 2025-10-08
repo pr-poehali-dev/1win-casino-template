@@ -86,7 +86,13 @@ const Index = () => {
                 {navItems.map((item) => (
                   <button
                     key={item}
-                    onClick={() => setActiveSection(item)}
+                    onClick={() => {
+                      if (item === 'Слоты') {
+                        navigate('/slots');
+                      } else {
+                        setActiveSection(item);
+                      }
+                    }}
                     className={`text-sm font-medium transition-colors hover:text-[#F59E0B] ${
                       activeSection === item ? 'text-[#F59E0B]' : 'text-gray-300'
                     }`}
@@ -298,6 +304,7 @@ const Index = () => {
             <div className="text-center mt-8">
               <p className="text-gray-400 mb-4">Показано 12 из {slots.length} игр</p>
               <Button
+                onClick={() => navigate('/slots')}
                 variant="outline"
                 className="border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-black px-8"
               >
