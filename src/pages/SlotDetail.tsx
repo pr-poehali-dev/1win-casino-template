@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
 import { slots } from '@/data/slots';
 import { getDemoUrl, hasDemo } from '@/utils/getDemoUrl';
+import { casinos, Casino } from '@/data/casinos';
 
 const SlotDetail = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const SlotDetail = () => {
   const slot = slots.find((s) => s.id === Number(id));
   const [isPlaying, setIsPlaying] = useState(false);
   const [playMode, setPlayMode] = useState<'demo' | 'real'>('demo');
+  const [selectedCasino, setSelectedCasino] = useState<Casino | null>(null);
 
   if (!slot) {
     return (
@@ -111,26 +113,159 @@ const SlotDetail = () => {
                           </Button>
                         </div>
                       </div>
-                    ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8">
-                        <div className="text-8xl">{slot.emoji}</div>
-                        <div className="text-center">
-                          <h3 className="text-2xl font-bold mb-2">Вход в аккаунт</h3>
-                          <p className="text-gray-400 mb-6">
-                            Для игры на реальные деньги необходимо<br />
-                            войти в аккаунт или зарегистрироваться.
-                          </p>
+                    ) : selectedCasino ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8 bg-gradient-to-br from-[#1F2937] via-[#374151] to-[#1F2937]">
+                        <div className="text-8xl mb-4">{selectedCasino.logo}</div>
+                        <div className="text-center max-w-2xl">
+                          <h3 className="text-3xl font-bold mb-3">{selectedCasino.name}</h3>
+                          <div className="flex items-center justify-center gap-2 mb-6">
+                            <div className="flex gap-1">
+                              {Array.from({ length: 5 }).map((_, i) => (
+                                <Icon
+                                  key={i}
+                                  name="Star"
+                                  size={20}
+                                  className={i < Math.floor(selectedCasino.rating) ? 'fill-[#F59E0B] text-[#F59E0B]' : 'text-gray-600'}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-gray-400">({selectedCasino.rating})</span>
+                          </div>
+                          
+                          <div className="bg-[#111827]/80 rounded-xl p-6 mb-6 border-2 border-[#F59E0B]">
+                            <div className="text-[#F59E0B] font-bold text-xl mb-2">🎁 БОНУС</div>
+                            <div className="text-3xl font-bold mb-2">{selectedCasino.bonuses.welcome}</div>
+                            <div className="text-2xl text-[#10B981] font-bold mb-3">+ {selectedCasino.bonuses.freespins}</div>
+                            <p className="text-gray-300 text-sm">{selectedCasino.bonuses.description}</p>
+                            {selectedCasino.promoCode && (
+                              <div className="mt-4 bg-[#374151] rounded-lg p-3 border border-dashed border-[#F59E0B]">
+                                <div className="text-xs text-gray-400 mb-1">Промокод:</div>
+                                <div className="text-lg font-bold text-[#F59E0B]">{selectedCasino.promoCode}</div>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
+                            <div className="bg-[#111827]/60 rounded-lg p-3">
+                              <div className="text-gray-400 mb-1">Мин. депозит</div>
+                              <div className="font-bold">{selectedCasino.minDeposit}₽</div>
+                            </div>
+                            <div className="bg-[#111827]/60 rounded-lg p-3">
+                              <div className="text-gray-400 mb-1">Вывод средств</div>
+                              <div className="font-bold text-[#10B981]">{selectedCasino.withdrawalTime}</div>
+                            </div>
+                          </div>
+
                           <div className="flex gap-3 justify-center">
-                            <Button className="bg-[#10B981] hover:bg-[#059669] text-white">
-                              <Icon name="LogIn" size={20} className="mr-2" />
-                              Войти
+                            <Button
+                              onClick={() => window.open(`${selectedCasino.url}?promo=${selectedCasino.promoCode || ''}&game=${slot.title}`, '_blank')}
+                              size="lg"
+                              className="bg-[#10B981] hover:bg-[#059669] text-white font-bold px-8"
+                            >
+                              <Icon name="ExternalLink" size={20} className="mr-2" />
+                              Играть в {selectedCasino.name}
                             </Button>
                             <Button
+                              onClick={() => setSelectedCasino(null)}
                               variant="outline"
-                              className="border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-black"
+                              size="lg"
+                              className="border-[#374151] hover:bg-[#374151]"
                             >
-                              Регистрация
+                              <Icon name="ArrowLeft" size={20} className="mr-2" />
+                              Назад
                             </Button>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full overflow-y-auto p-8">
+                        <div className="max-w-4xl mx-auto">
+                          <div className="text-center mb-8">
+                            <div className="text-6xl mb-4">{slot.emoji}</div>
+                            <h3 className="text-3xl font-bold mb-2">Выберите казино для игры</h3>
+                            <p className="text-gray-400">
+                              Получите эксклюзивные бонусы и начните выигрывать!
+                            </p>
+                          </div>
+
+                          <div className="grid gap-4">
+                            {casinos.map((casino) => (
+                              <Card
+                                key={casino.id}
+                                className="bg-[#111827] border-[#374151] hover:border-[#F59E0B] transition-all cursor-pointer p-6"
+                                onClick={() => setSelectedCasino(casino)}
+                              >
+                                <div className="flex items-start gap-6">
+                                  <div className="text-6xl">{casino.logo}</div>
+                                  <div className="flex-1">
+                                    <div className="flex items-center justify-between mb-3">
+                                      <div>
+                                        <h4 className="text-2xl font-bold mb-1">{casino.name}</h4>
+                                        <div className="flex items-center gap-2">
+                                          <div className="flex gap-1">
+                                            {Array.from({ length: 5 }).map((_, i) => (
+                                              <Icon
+                                                key={i}
+                                                name="Star"
+                                                size={16}
+                                                className={i < Math.floor(casino.rating) ? 'fill-[#F59E0B] text-[#F59E0B]' : 'text-gray-600'}
+                                              />
+                                            ))}
+                                          </div>
+                                          <span className="text-sm text-gray-400">({casino.rating})</span>
+                                        </div>
+                                      </div>
+                                      <Badge className="bg-[#10B981] text-black font-bold text-lg px-4 py-2">
+                                        {casino.bonuses.welcome}
+                                      </Badge>
+                                    </div>
+
+                                    <div className="bg-[#1F2937] rounded-lg p-4 mb-4">
+                                      <div className="flex items-center gap-3 mb-2">
+                                        <span className="text-2xl">🎁</span>
+                                        <div>
+                                          <div className="font-bold text-[#F59E0B]">{casino.bonuses.freespins}</div>
+                                          <div className="text-sm text-gray-400">{casino.bonuses.description}</div>
+                                        </div>
+                                      </div>
+                                      {casino.promoCode && (
+                                        <div className="mt-3 flex items-center gap-2">
+                                          <Badge className="bg-[#374151] text-[#F59E0B] border border-[#F59E0B]">
+                                            Промокод: {casino.promoCode}
+                                          </Badge>
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                      {casino.features.slice(0, 3).map((feature, idx) => (
+                                        <Badge key={idx} variant="outline" className="border-[#374151] text-gray-300">
+                                          <Icon name="Check" size={14} className="mr-1 text-[#10B981]" />
+                                          {feature}
+                                        </Badge>
+                                      ))}
+                                    </div>
+
+                                    <div className="flex items-center justify-between text-sm">
+                                      <div className="flex gap-4 text-gray-400">
+                                        <span>Мин. депозит: <span className="text-white font-semibold">{casino.minDeposit}₽</span></span>
+                                        <span>Вывод: <span className="text-[#10B981] font-semibold">{casino.withdrawalTime}</span></span>
+                                      </div>
+                                      <Button
+                                        className="bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setSelectedCasino(casino);
+                                        }}
+                                      >
+                                        Выбрать
+                                        <Icon name="ChevronRight" size={16} className="ml-1" />
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Card>
+                            ))}
                           </div>
                         </div>
                       </div>
