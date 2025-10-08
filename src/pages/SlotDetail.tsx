@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -10,6 +11,8 @@ const SlotDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const slot = slots.find((s) => s.id === Number(id));
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playMode, setPlayMode] = useState<'demo' | 'real'>('demo');
 
   if (!slot) {
     return (
@@ -65,8 +68,40 @@ const SlotDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Card className="bg-[#111827] border-[#374151] overflow-hidden">
-              <div className="relative bg-gradient-to-br from-[#374151] to-[#1F2937] h-96 flex items-center justify-center">
-                <div className="text-9xl animate-scale-in">{slot.emoji}</div>
+              <div className="relative bg-gradient-to-br from-[#374151] to-[#1F2937] h-96 md:h-[500px] flex items-center justify-center">
+                {!isPlaying ? (
+                  <>
+                    <div className="text-9xl animate-scale-in">{slot.emoji}</div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Button
+                        size="lg"
+                        onClick={() => setIsPlaying(true)}
+                        className="bg-[#10B981] hover:bg-[#059669] text-white font-bold px-8 py-6 text-xl"
+                      >
+                        <Icon name="Play" size={28} className="mr-3" />
+                        Запустить {playMode === 'demo' ? 'демо' : 'игру'}
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full h-full relative">
+                    <iframe
+                      src={`https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=${slot.title.toLowerCase().replace(/[^a-z0-9]/g, '')}&websiteUrl=https://1win.com&jurisdiction=99&lobbyURL=https://1win.com`}
+                      className="w-full h-full border-0"
+                      allow="autoplay; fullscreen"
+                      title={`${slot.title} - ${playMode === 'demo' ? 'Демо режим' : 'Игра на деньги'}`}
+                    />
+                    <Button
+                      size="sm"
+                      onClick={() => setIsPlaying(false)}
+                      variant="outline"
+                      className="absolute top-2 right-2 z-10 bg-[#111827]/80 hover:bg-[#111827] border-[#374151]"
+                    >
+                      <Icon name="X" size={16} className="mr-1" />
+                      Закрыть
+                    </Button>
+                  </div>
+                )}
                 <div className="absolute top-4 right-4 flex gap-2">
                   <Badge className="bg-[#F59E0B] text-black font-semibold">
                     RTP {slot.rtp}%
@@ -255,16 +290,46 @@ const SlotDetail = () => {
           <div className="lg:col-span-1">
             <Card className="bg-[#111827] border-[#374151] p-6 sticky top-24">
               <h3 className="text-2xl font-bold mb-4">Начать игру</h3>
-              <Button className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-bold text-lg py-6 mb-3">
-                <Icon name="Play" size={20} className="mr-2" />
-                Играть на деньги
-              </Button>
+              
+              <div className="bg-[#1F2937] p-3 rounded-lg mb-4 flex gap-2">
+                <Button
+                  onClick={() => {
+                    setPlayMode('demo');
+                    setIsPlaying(true);
+                  }}
+                  className={`flex-1 ${
+                    playMode === 'demo'
+                      ? 'bg-[#F59E0B] hover:bg-[#D97706] text-black'
+                      : 'bg-transparent hover:bg-[#374151] text-gray-300'
+                  }`}
+                  size="sm"
+                >
+                  <Icon name="Gamepad2" size={16} className="mr-1" />
+                  Демо
+                </Button>
+                <Button
+                  onClick={() => {
+                    setPlayMode('real');
+                    setIsPlaying(true);
+                  }}
+                  className={`flex-1 ${
+                    playMode === 'real'
+                      ? 'bg-[#10B981] hover:bg-[#059669] text-white'
+                      : 'bg-transparent hover:bg-[#374151] text-gray-300'
+                  }`}
+                  size="sm"
+                >
+                  <Icon name="DollarSign" size={16} className="mr-1" />
+                  Реальные
+                </Button>
+              </div>
+
               <Button
-                variant="outline"
-                className="w-full border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-black font-semibold py-6 mb-6"
+                onClick={() => setIsPlaying(true)}
+                className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-bold text-lg py-6 mb-6"
               >
-                <Icon name="Gamepad2" size={20} className="mr-2" />
-                Демо-режим
+                <Icon name="Play" size={20} className="mr-2" />
+                {playMode === 'demo' ? 'Играть бесплатно' : 'Играть на деньги'}
               </Button>
 
               <div className="border-t border-[#374151] pt-4 mb-6 space-y-3">
