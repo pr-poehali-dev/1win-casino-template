@@ -34,6 +34,21 @@ export interface Translations {
     features: string;
     rating: string;
   };
+  nav: {
+    main: string;
+    casino: string;
+    slots: string;
+    live: string;
+    sport: string;
+    promo: string;
+  };
+  auth: {
+    login: string;
+    register: string;
+  };
+  chat: {
+    greeting: string;
+  };
   header: {
     allSlots: string;
     main: string;
@@ -135,6 +150,21 @@ export const translations: Record<Language, Translations> = {
       features: 'Особенности',
       rating: 'Рейтинг',
     },
+    nav: {
+      main: 'Главная',
+      casino: 'Казино',
+      slots: 'Слоты',
+      live: 'Live',
+      sport: 'Спорт',
+      promo: 'Промо',
+    },
+    auth: {
+      login: 'Вход',
+      register: 'Регистрация',
+    },
+    chat: {
+      greeting: 'Здравствуйте! Чем могу помочь?',
+    },
     header: {
       allSlots: 'Все слоты',
       main: 'Главная',
@@ -233,6 +263,21 @@ export const translations: Record<Language, Translations> = {
       bonus: 'Bonus',
       features: 'Cechy',
       rating: 'Ocena',
+    },
+    nav: {
+      main: 'Strona główna',
+      casino: 'Kasyno',
+      slots: 'Sloty',
+      live: 'Live',
+      sport: 'Sport',
+      promo: 'Promocje',
+    },
+    auth: {
+      login: 'Zaloguj się',
+      register: 'Rejestracja',
+    },
+    chat: {
+      greeting: 'Witaj! W czym mogę pomóc?',
     },
     header: {
       allSlots: 'Wszystkie sloty',
@@ -333,6 +378,21 @@ export const translations: Record<Language, Translations> = {
       features: 'Features',
       rating: 'Rating',
     },
+    nav: {
+      main: 'Home',
+      casino: 'Casino',
+      slots: 'Slots',
+      live: 'Live',
+      sport: 'Sports',
+      promo: 'Promos',
+    },
+    auth: {
+      login: 'Login',
+      register: 'Register',
+    },
+    chat: {
+      greeting: 'Hello! How can I help you?',
+    },
     header: {
       allSlots: 'All Slots',
       main: 'Home',
@@ -431,6 +491,21 @@ export const translations: Record<Language, Translations> = {
       bonus: 'Bonus',
       features: 'Features',
       rating: 'Rating',
+    },
+    nav: {
+      main: 'Home',
+      casino: 'Casino',
+      slots: 'Slots',
+      live: 'Live',
+      sport: 'Sports',
+      promo: 'Promos',
+    },
+    auth: {
+      login: 'Login',
+      register: 'Register',
+    },
+    chat: {
+      greeting: 'Hello! How can I help you?',
     },
     header: {
       allSlots: 'All Slots',
@@ -531,6 +606,21 @@ export const translations: Record<Language, Translations> = {
       features: 'Особливості',
       rating: 'Рейтинг',
     },
+    nav: {
+      main: 'Головна',
+      casino: 'Казино',
+      slots: 'Слоти',
+      live: 'Live',
+      sport: 'Спорт',
+      promo: 'Промо',
+    },
+    auth: {
+      login: 'Вхід',
+      register: 'Реєстрація',
+    },
+    chat: {
+      greeting: 'Вітаю! Чим можу допомогти?',
+    },
     header: {
       allSlots: 'Всі слоти',
       main: 'Головна',
@@ -629,6 +719,21 @@ export const translations: Record<Language, Translations> = {
       bonus: 'बोनस',
       features: 'विशेषताएं',
       rating: 'रेटिंग',
+    },
+    nav: {
+      main: 'होम',
+      casino: 'कैसीनो',
+      slots: 'स्लॉट्स',
+      live: 'लाइव',
+      sport: 'स्पोर्ट्स',
+      promo: 'प्रोमो',
+    },
+    auth: {
+      login: 'लॉगिन',
+      register: 'रजिस्टर',
+    },
+    chat: {
+      greeting: 'नमस्ते! मैं आपकी कैसे मदद कर सकता हूं?',
     },
     header: {
       allSlots: 'सभी स्लॉट्स',
@@ -729,6 +834,21 @@ export const translations: Record<Language, Translations> = {
       features: 'ویژگی‌ها',
       rating: 'امتیاز',
     },
+    nav: {
+      main: 'خانه',
+      casino: 'کازینو',
+      slots: 'اسلات‌ها',
+      live: 'زنده',
+      sport: 'ورزش',
+      promo: 'پیشنهادات',
+    },
+    auth: {
+      login: 'ورود',
+      register: 'ثبت‌نام',
+    },
+    chat: {
+      greeting: 'سلام! چطور می‌توانم کمک کنم?',
+    },
     header: {
       allSlots: 'همه اسلات‌ها',
       main: 'خانه',
@@ -828,6 +948,21 @@ export const translations: Record<Language, Translations> = {
       features: '特徴',
       rating: '評価',
     },
+    nav: {
+      main: 'ホーム',
+      casino: 'カジノ',
+      slots: 'スロット',
+      live: 'ライブ',
+      sport: 'スポーツ',
+      promo: 'プロモ',
+    },
+    auth: {
+      login: 'ログイン',
+      register: '登録',
+    },
+    chat: {
+      greeting: 'こんにちは！どうお手伝いできますか？',
+    },
     header: {
       allSlots: '全てのスロット',
       main: 'ホーム',
@@ -926,6 +1061,21 @@ export const translations: Record<Language, Translations> = {
       bonus: 'Bonus',
       features: 'Features',
       rating: 'Rating',
+    },
+    nav: {
+      main: 'Home',
+      casino: 'Casino',
+      slots: 'Slots',
+      live: 'Live',
+      sport: 'Sports',
+      promo: 'Promos',
+    },
+    auth: {
+      login: 'Login',
+      register: 'Register',
+    },
+    chat: {
+      greeting: 'G\'day! How can I help you?',
     },
     header: {
       allSlots: 'All Pokies',

@@ -14,9 +14,20 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 const Index = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+
+  if (!t) {
+    return (
+      <div className="min-h-screen bg-[#1F2937] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">🎰</div>
+          <div className="text-xl text-gray-300">Загрузка...</div>
+        </div>
+      </div>
+    );
+  }
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(t.nav.main);
+  const [activeSection, setActiveSection] = useState('main');
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [currentJackpot, setCurrentJackpot] = useState(0);
   const [chatMessages, setChatMessages] = useState([
@@ -24,7 +35,7 @@ const Index = () => {
   ]);
   const [messageInput, setMessageInput] = useState('');
 
-  const navItems = [t.nav.main, t.nav.casino, t.nav.slots, t.nav.live, t.nav.sport, t.nav.promo];
+  const navItems = ['main', 'casino', 'slots', 'live', 'sport', 'promo'];
   const displaySlots = slots.slice(0, 12);
 
   const promos = [
@@ -90,7 +101,7 @@ const Index = () => {
                   <button
                     key={item}
                     onClick={() => {
-                      if (item === 'Слоты') {
+                      if (item === 'slots') {
                         navigate('/slots');
                       } else {
                         setActiveSection(item);
@@ -100,7 +111,7 @@ const Index = () => {
                       activeSection === item ? 'text-[#F59E0B]' : 'text-gray-300'
                     }`}
                   >
-                    {item}
+                    {t.nav[item as keyof typeof t.nav]}
                   </button>
                 ))}
               </nav>
