@@ -15,6 +15,7 @@ const SlotDetail = () => {
   const slot = slots.find((s) => s.id === Number(id));
   const [playMode, setPlayMode] = useState<'demo' | 'real'>('demo');
   const [selectedCasino, setSelectedCasino] = useState<Casino | null>(null);
+  const [isDemoPlaying, setIsDemoPlaying] = useState(false);
 
   if (!slot) {
     return (
@@ -34,7 +35,29 @@ const SlotDetail = () => {
     .slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-[#1F2937]">
+    <>
+      {isDemoPlaying && hasDemo(slot) && (
+        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
+          <div className="w-full h-full relative flex flex-col">
+            <iframe
+              src={getDemoUrl(slot)!}
+              className="w-full h-full border-0 rounded-lg"
+              allow="autoplay; fullscreen"
+              title={`${slot.title} - Демо режим`}
+            />
+            <Button
+              size="lg"
+              onClick={() => setIsDemoPlaying(false)}
+              variant="outline"
+              className="absolute top-4 right-4 z-10 bg-[#111827]/90 hover:bg-[#111827] border-[#374151]"
+            >
+              <Icon name="X" size={20} className="mr-2" />
+              Закрыть демо
+            </Button>
+          </div>
+        </div>
+      )}
+      <div className="min-h-screen bg-[#1F2937]">
       <header className="bg-[#111827] border-b border-[#374151] sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -85,7 +108,7 @@ const SlotDetail = () => {
                         {hasDemo(slot) ? (
                           <Button
                             size="lg"
-                            onClick={() => window.open(getDemoUrl(slot)!, '_blank')}
+                            onClick={() => setIsDemoPlaying(true)}
                             className="bg-[#10B981] hover:bg-[#059669] text-white font-bold px-8 py-4 text-lg"
                           >
                             <Icon name="Play" size={24} className="mr-2" />
@@ -544,7 +567,8 @@ const SlotDetail = () => {
           </div>
         </div>
       </main>
-    </div>
+      </div>
+    </>
   );
 };
 
