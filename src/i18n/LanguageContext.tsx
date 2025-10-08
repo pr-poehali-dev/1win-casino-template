@@ -1,10 +1,13 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { Language, Translations, translations } from './translations';
+import { formatCurrency, getCurrencySymbol } from '@/utils/formatCurrency';
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: Translations;
+  formatCurrency: (amount: number) => string;
+  currencySymbol: string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -70,6 +73,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     language,
     setLanguage,
     t: translations[language],
+    formatCurrency: (amount: number) => formatCurrency(amount, language),
+    currencySymbol: getCurrencySymbol(language),
   };
 
   if (!isInitialized) {

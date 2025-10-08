@@ -14,7 +14,7 @@ import SEOHead from '@/components/SEOHead';
 
 const Index = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, formatCurrency } = useLanguage();
 
   if (!t) {
     return (
@@ -40,7 +40,7 @@ const Index = () => {
   const displaySlots = slots.slice(0, 12);
 
   const promos = [
-    { title: t.promo.firstDepositTitle, bonus: t.promo.firstDepositBonus, amount: t.promo.firstDepositAmount },
+    { title: t.promo.firstDepositTitle, bonus: t.promo.firstDepositBonus, amount: formatCurrency(100000) },
     { title: t.promo.freespinsTitle, bonus: t.promo.freespinsBonus, amount: t.promo.freespinsAmount },
     { title: t.promo.cashbackTitle, bonus: t.promo.cashbackBonus, amount: t.promo.cashbackAmount },
   ];
@@ -59,13 +59,7 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formatJackpot = (amount: number) => {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
+
 
   const sendMessage = () => {
     if (!messageInput.trim()) return;
@@ -217,7 +211,7 @@ const Index = () => {
                       </div>
                       <div className="text-right">
                         <div className="text-4xl font-bold text-black tabular-nums">
-                          {formatJackpot(jackpot.amount)}
+                          {formatCurrency(jackpot.amount)}
                         </div>
                         <Button
                           size="sm"
@@ -249,7 +243,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <h3 className="text-3xl font-bold mb-8 flex items-center gap-3">
               <span className="text-4xl">🎁</span>
-              Акции и бонусы
+              {t.promo.title}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {promos.map((promo, index) => (
@@ -261,7 +255,7 @@ const Index = () => {
                   <h4 className="text-xl font-semibold mb-2">{promo.title}</h4>
                   <p className="text-gray-400 mb-4">{promo.amount}</p>
                   <Button className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold">
-                    Получить
+                    {t.slotDetail.getBonus}
                   </Button>
                 </Card>
               ))}

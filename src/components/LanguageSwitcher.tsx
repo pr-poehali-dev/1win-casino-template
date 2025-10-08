@@ -45,9 +45,9 @@ const LanguageSwitcher = () => {
                   }`}
                 >
                   <span className="text-2xl">{lang.flag}</span>
-                  <div className="text-left">
+                  <div className="text-left flex-1">
                     <div className="text-sm font-medium">{lang.nativeName}</div>
-                    <div className="text-xs opacity-70">{lang.name}</div>
+                    <div className="text-xs opacity-70">{lang.currency.symbol} {lang.currency.code}</div>
                   </div>
                   {language === lang.code && (
                     <Icon name="Check" size={16} className="ml-auto" />

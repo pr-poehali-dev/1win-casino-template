@@ -5,18 +5,23 @@ export interface LanguageOption {
   name: string;
   nativeName: string;
   flag: string;
+  currency: {
+    code: string;
+    symbol: string;
+    position: 'before' | 'after';
+  };
 }
 
 export const languages: LanguageOption[] = [
-  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺' },
-  { code: 'pl', name: 'Polish', nativeName: 'Polski', flag: '🇵🇱' },
-  { code: 'en-ca', name: 'English (Canada)', nativeName: 'English (CA)', flag: '🇨🇦' },
-  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧' },
-  { code: 'uk', name: 'Ukrainian', nativeName: 'Українська', flag: '🇺🇦' },
-  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
-  { code: 'fa', name: 'Persian', nativeName: 'فارسی', flag: '🇮🇷' },
-  { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
-  { code: 'en-au', name: 'English (Australia)', nativeName: 'English (AU)', flag: '🇦🇺' },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺', currency: { code: 'RUB', symbol: '₽', position: 'after' } },
+  { code: 'pl', name: 'Polish', nativeName: 'Polski', flag: '🇵🇱', currency: { code: 'PLN', symbol: 'zł', position: 'after' } },
+  { code: 'en-ca', name: 'English (Canada)', nativeName: 'English (CA)', flag: '🇨🇦', currency: { code: 'CAD', symbol: '$', position: 'before' } },
+  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧', currency: { code: 'GBP', symbol: '£', position: 'before' } },
+  { code: 'uk', name: 'Ukrainian', nativeName: 'Українська', flag: '🇺🇦', currency: { code: 'UAH', symbol: '₴', position: 'after' } },
+  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳', currency: { code: 'INR', symbol: '₹', position: 'before' } },
+  { code: 'fa', name: 'Persian', nativeName: 'فارسی', flag: '🇮🇷', currency: { code: 'IRR', symbol: '﷼', position: 'after' } },
+  { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵', currency: { code: 'JPY', symbol: '¥', position: 'before' } },
+  { code: 'en-au', name: 'English (Australia)', nativeName: 'English (AU)', flag: '🇦🇺', currency: { code: 'AUD', symbol: '$', position: 'before' } },
 ];
 
 export interface Translations {
@@ -306,7 +311,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Акции и бонусы',
       firstDepositTitle: 'Бонус на первый депозит',
       firstDepositBonus: '200%',
-      firstDepositAmount: 'до 100 000 ₽',
+      firstDepositAmount: 'на первый депозит',
       freespinsTitle: 'Фриспины каждый день',
       freespinsBonus: '50',
       freespinsAmount: 'бесплатных вращений',
@@ -474,7 +479,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Promocje i bonusy',
       firstDepositTitle: 'Bonus za pierwszy depozyt',
       firstDepositBonus: '200%',
-      firstDepositAmount: 'do 10 000 zł',
+      firstDepositAmount: 'na pierwszy depozyt',
       freespinsTitle: 'Darmowe spiny codziennie',
       freespinsBonus: '50',
       freespinsAmount: 'darmowych obrotów',
@@ -642,7 +647,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Promotions and Bonuses',
       firstDepositTitle: 'First Deposit Bonus',
       firstDepositBonus: '200%',
-      firstDepositAmount: 'up to $10,000',
+      firstDepositAmount: 'on first deposit',
       freespinsTitle: 'Daily Free Spins',
       freespinsBonus: '50',
       freespinsAmount: 'free spins',
@@ -810,7 +815,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Promotions and Bonuses',
       firstDepositTitle: 'First Deposit Bonus',
       firstDepositBonus: '200%',
-      firstDepositAmount: 'up to $10,000',
+      firstDepositAmount: 'on first deposit',
       freespinsTitle: 'Daily Free Spins',
       freespinsBonus: '50',
       freespinsAmount: 'free spins',
@@ -978,7 +983,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Акції та бонуси',
       firstDepositTitle: 'Бонус на перший депозит',
       firstDepositBonus: '200%',
-      firstDepositAmount: 'до 50 000 ₴',
+      firstDepositAmount: 'на перший депозит',
       freespinsTitle: 'Фріспіни щодня',
       freespinsBonus: '50',
       freespinsAmount: 'безкоштовних обертань',
@@ -1146,7 +1151,7 @@ export const translations: Record<Language, Translations> = {
       title: 'प्रमोशन और बोनस',
       firstDepositTitle: 'पहली डिपॉजिट बोनस',
       firstDepositBonus: '200%',
-      firstDepositAmount: '₹100,000 तक',
+      firstDepositAmount: 'पहली जमा पर',
       freespinsTitle: 'दैनिक फ्री स्पिन',
       freespinsBonus: '50',
       freespinsAmount: 'मुफ्त स्पिन',
@@ -1314,7 +1319,7 @@ export const translations: Record<Language, Translations> = {
       title: 'پیشنهادات و پاداش‌ها',
       firstDepositTitle: 'پاداش اولین واریز',
       firstDepositBonus: '200%',
-      firstDepositAmount: 'تا 10,000,000 ﷼',
+      firstDepositAmount: 'در اولین واریز',
       freespinsTitle: 'چرخش‌های رایگان روزانه',
       freespinsBonus: '50',
       freespinsAmount: 'چرخش رایگان',
@@ -1482,7 +1487,7 @@ export const translations: Record<Language, Translations> = {
       title: 'プロモーションとボーナス',
       firstDepositTitle: '初回入金ボーナス',
       firstDepositBonus: '200%',
-      firstDepositAmount: '最大¥100,000',
+      firstDepositAmount: '初回入金時',
       freespinsTitle: '毎日フリースピン',
       freespinsBonus: '50',
       freespinsAmount: 'フリースピン',
@@ -1650,7 +1655,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Promotions and Bonuses',
       firstDepositTitle: 'First Deposit Bonus',
       firstDepositBonus: '200%',
-      firstDepositAmount: 'up to $10,000',
+      firstDepositAmount: 'on first deposit',
       freespinsTitle: 'Daily Free Spins',
       freespinsBonus: '50',
       freespinsAmount: 'free spins',

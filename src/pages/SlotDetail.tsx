@@ -15,7 +15,7 @@ import SEOHead from '@/components/SEOHead';
 const SlotDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, formatCurrency } = useLanguage();
   const slot = slots.find((s) => s.id === Number(id));
   const [playMode, setPlayMode] = useState<'demo' | 'real'>('demo');
   const [selectedCasino, setSelectedCasino] = useState<Casino | null>(null);
