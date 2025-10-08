@@ -14,6 +14,7 @@ export interface Slot {
   emoji: string;
   rating: number;
   plays: number;
+  demoUrl?: string;
 }
 
 export const slots: Slot[] = [

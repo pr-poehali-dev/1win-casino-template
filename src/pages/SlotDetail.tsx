@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
 import { slots } from '@/data/slots';
+import { getDemoUrl, hasDemo } from '@/utils/getDemoUrl';
 
 const SlotDetail = () => {
   const { id } = useParams();
@@ -85,17 +86,60 @@ const SlotDetail = () => {
                   </>
                 ) : (
                   <div className="w-full h-full relative">
-                    <iframe
-                      src={`https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=${slot.title.toLowerCase().replace(/[^a-z0-9]/g, '')}&websiteUrl=https://1win.com&jurisdiction=99&lobbyURL=https://1win.com`}
-                      className="w-full h-full border-0"
-                      allow="autoplay; fullscreen"
-                      title={`${slot.title} - ${playMode === 'demo' ? 'Демо режим' : 'Игра на деньги'}`}
-                    />
+                    {playMode === 'demo' && hasDemo(slot) ? (
+                      <iframe
+                        src={getDemoUrl(slot)!}
+                        className="w-full h-full border-0"
+                        allow="autoplay; fullscreen"
+                        title={`${slot.title} - Демо режим`}
+                      />
+                    ) : playMode === 'demo' ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8">
+                        <div className="text-8xl">{slot.emoji}</div>
+                        <div className="text-center">
+                          <h3 className="text-2xl font-bold mb-2">Демо временно недоступно</h3>
+                          <p className="text-gray-400 mb-6">
+                            Для этого слота демо-режим пока не доступен.<br />
+                            Попробуйте сыграть на реальные деньги.
+                          </p>
+                          <Button
+                            onClick={() => setPlayMode('real')}
+                            className="bg-[#10B981] hover:bg-[#059669] text-white"
+                          >
+                            <Icon name="DollarSign" size={20} className="mr-2" />
+                            Играть на деньги
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8">
+                        <div className="text-8xl">{slot.emoji}</div>
+                        <div className="text-center">
+                          <h3 className="text-2xl font-bold mb-2">Вход в аккаунт</h3>
+                          <p className="text-gray-400 mb-6">
+                            Для игры на реальные деньги необходимо<br />
+                            войти в аккаунт или зарегистрироваться.
+                          </p>
+                          <div className="flex gap-3 justify-center">
+                            <Button className="bg-[#10B981] hover:bg-[#059669] text-white">
+                              <Icon name="LogIn" size={20} className="mr-2" />
+                              Войти
+                            </Button>
+                            <Button
+                              variant="outline"
+                              className="border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-black"
+                            >
+                              Регистрация
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     <Button
                       size="sm"
                       onClick={() => setIsPlaying(false)}
                       variant="outline"
-                      className="absolute top-2 right-2 z-10 bg-[#111827]/80 hover:bg-[#111827] border-[#374151]"
+                      className="absolute top-2 right-2 z-10 bg-[#111827]/90 hover:bg-[#111827] border-[#374151]"
                     >
                       <Icon name="X" size={16} className="mr-1" />
                       Закрыть
