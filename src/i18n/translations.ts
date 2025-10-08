@@ -132,6 +132,60 @@ export interface Translations {
     medium: string;
     high: string;
   };
+  promo: {
+    title: string;
+    firstDepositTitle: string;
+    firstDepositBonus: string;
+    firstDepositAmount: string;
+    freespinsTitle: string;
+    freespinsBonus: string;
+    freespinsAmount: string;
+    cashbackTitle: string;
+    cashbackBonus: string;
+    cashbackAmount: string;
+  };
+  jackpot: {
+    title: string;
+    current: string;
+    winners: string;
+  };
+  footer: {
+    about: string;
+    support: string;
+    legal: string;
+    contactUs: string;
+    faq: string;
+    terms: string;
+    privacy: string;
+    responsible: string;
+    copyright: string;
+  };
+  allSlots: {
+    title: string;
+    found: string;
+    of: string;
+    games: string;
+    search: string;
+    searchPlaceholder: string;
+    provider: string;
+    allProviders: string;
+    category: string;
+    allCategories: string;
+    volatilityLabel: string;
+    allVolatility: string;
+    sortBy: string;
+    popularity: string;
+    ratingSort: string;
+    rtpSort: string;
+    maxWinSort: string;
+    resetFilters: string;
+    noResults: string;
+  };
+  seo: {
+    metaTitle: string;
+    metaDescription: string;
+    keywords: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -170,9 +224,9 @@ export const translations: Record<Language, Translations> = {
       main: 'Главная',
     },
     hero: {
-      title: 'Лучшие онлайн слоты 2025',
-      subtitle: 'Играйте в топовые слоты от ведущих провайдеров',
-      playButton: 'Начать играть',
+      title: 'Ваш шанс на большой выигрыш',
+      subtitle: 'Казино и ставки на спорт • Более 10 000 игр • Быстрый вывод средств',
+      playButton: 'Получить бонус 200%',
       learnMore: 'Узнать больше',
     },
     slots: {
@@ -248,6 +302,60 @@ export const translations: Record<Language, Translations> = {
       medium: 'Средняя',
       high: 'Высокая',
     },
+    promo: {
+      title: 'Акции и бонусы',
+      firstDepositTitle: 'Бонус на первый депозит',
+      firstDepositBonus: '200%',
+      firstDepositAmount: 'до 100 000 ₽',
+      freespinsTitle: 'Фриспины каждый день',
+      freespinsBonus: '50',
+      freespinsAmount: 'бесплатных вращений',
+      cashbackTitle: 'Кэшбэк по пятницам',
+      cashbackBonus: '10%',
+      cashbackAmount: 'от проигрышей',
+    },
+    jackpot: {
+      title: 'Джекпоты',
+      current: 'Текущий джекпот',
+      winners: 'Победители за сегодня',
+    },
+    footer: {
+      about: 'О нас',
+      support: 'Поддержка',
+      legal: 'Правовая информация',
+      contactUs: 'Связаться с нами',
+      faq: 'Частые вопросы',
+      terms: 'Условия использования',
+      privacy: 'Политика конфиденциальности',
+      responsible: 'Ответственная игра',
+      copyright: '© 2025 1WIN Casino. Все права защищены. Играйте ответственно.',
+    },
+    allSlots: {
+      title: 'Все слоты казино',
+      found: 'Найдено',
+      of: 'из',
+      games: 'игр',
+      search: 'Поиск',
+      searchPlaceholder: 'Название слота или провайдер...',
+      provider: 'Провайдер',
+      allProviders: 'Все провайдеры',
+      category: 'Категория',
+      allCategories: 'Все категории',
+      volatilityLabel: 'Волатильность',
+      allVolatility: 'Любая',
+      sortBy: 'Сортировка',
+      popularity: 'По популярности',
+      ratingSort: 'По рейтингу',
+      rtpSort: 'По RTP',
+      maxWinSort: 'По макс. выигрышу',
+      resetFilters: 'Сбросить фильтры',
+      noResults: 'Слоты не найдены',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - Лучшие игровые слоты онлайн 2025 | Играть на деньги',
+      metaDescription: 'Официальное онлайн-казино 1WIN предлагает более 5000 лицензированных слотов от ведущих провайдеров: Pragmatic Play, NetEnt, Play\'n GO. Щедрые бонусы до 200% на первый депозит, мгновенный вывод выигрышей, круглосуточная поддержка. Играйте в проверенные слоты с высоким RTP до 98%, джекпоты от 1 000 000 ₽. Демо-режим доступен без регистрации. Безопасные платежи, честная игра, лицензия Кюрасао. Начните выигрывать уже сегодня!',
+      keywords: 'онлайн казино, игровые автоматы, слоты на деньги, казино 1win, бонусы казино, джекпот, играть в слоты',
+    },
   },
   pl: {
     common: {
@@ -284,9 +392,9 @@ export const translations: Record<Language, Translations> = {
       main: 'Strona główna',
     },
     hero: {
-      title: 'Najlepsze sloty online 2025',
-      subtitle: 'Graj w najlepsze sloty od czołowych dostawców',
-      playButton: 'Rozpocznij grę',
+      title: 'Twoja szansa na wielką wygraną',
+      subtitle: 'Kasyno i zakłady sportowe • Ponad 10 000 gier • Szybkie wypłaty',
+      playButton: 'Odbierz bonus 200%',
       learnMore: 'Dowiedz się więcej',
     },
     slots: {
@@ -362,6 +470,60 @@ export const translations: Record<Language, Translations> = {
       medium: 'Średnia',
       high: 'Wysoka',
     },
+    promo: {
+      title: 'Promocje i bonusy',
+      firstDepositTitle: 'Bonus za pierwszy depozyt',
+      firstDepositBonus: '200%',
+      firstDepositAmount: 'do 10 000 zł',
+      freespinsTitle: 'Darmowe spiny codziennie',
+      freespinsBonus: '50',
+      freespinsAmount: 'darmowych obrotów',
+      cashbackTitle: 'Cashback w piątki',
+      cashbackBonus: '10%',
+      cashbackAmount: 'od przegranych',
+    },
+    jackpot: {
+      title: 'Jackpoty',
+      current: 'Aktualny jackpot',
+      winners: 'Zwycięzcy dzisiaj',
+    },
+    footer: {
+      about: 'O nas',
+      support: 'Wsparcie',
+      legal: 'Informacje prawne',
+      contactUs: 'Skontaktuj się z nami',
+      faq: 'Najczęściej zadawane pytania',
+      terms: 'Warunki użytkowania',
+      privacy: 'Polityka prywatności',
+      responsible: 'Odpowiedzialna gra',
+      copyright: '© 2025 1WIN Casino. Wszelkie prawa zastrzeżone. Graj odpowiedzialnie.',
+    },
+    allSlots: {
+      title: 'Wszystkie sloty kasyna',
+      found: 'Znaleziono',
+      of: 'z',
+      games: 'gier',
+      search: 'Szukaj',
+      searchPlaceholder: 'Nazwa slotu lub dostawca...',
+      provider: 'Dostawca',
+      allProviders: 'Wszyscy dostawcy',
+      category: 'Kategoria',
+      allCategories: 'Wszystkie kategorie',
+      volatilityLabel: 'Zmienność',
+      allVolatility: 'Dowolna',
+      sortBy: 'Sortuj',
+      popularity: 'Według popularności',
+      ratingSort: 'Według oceny',
+      rtpSort: 'Według RTP',
+      maxWinSort: 'Według maks. wygranej',
+      resetFilters: 'Resetuj filtry',
+      noResults: 'Nie znaleziono slotów',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - Najlepsze Automaty Online 2025 | Graj Na Pieniądze',
+      metaDescription: 'Oficjalne kasyno online 1WIN oferuje ponad 5000 licencjonowanych slotów od wiodących dostawców: Pragmatic Play, NetEnt, Play\'n GO. Hojne bonusy do 200% na pierwszy depozyt, natychmiastowe wypłaty wygranych, wsparcie 24/7. Graj w sprawdzone sloty z wysokim RTP do 98%, jackpoty od 100 000 zł. Tryb demo dostępny bez rejestracji. Bezpieczne płatności, uczciwa gra, licencja Curaçao. Rozpocznij wygrywanie już dziś! Ekskluzywne promocje dla polskich graczy, szybkie przelewy bankowe i lokalne metody płatności.',
+      keywords: 'kasyno online, automaty do gier, sloty na pieniądze, kasyno 1win, bonusy kasynowe, jackpot, graj w sloty, automaty online',
+    },
   },
   'en-ca': {
     common: {
@@ -398,9 +560,9 @@ export const translations: Record<Language, Translations> = {
       main: 'Home',
     },
     hero: {
-      title: 'Best Online Slots 2025',
-      subtitle: 'Play top slots from leading providers',
-      playButton: 'Start Playing',
+      title: 'Your Chance for a Big Win',
+      subtitle: 'Casino and Sports Betting • Over 10,000 Games • Fast Withdrawals',
+      playButton: 'Get 200% Bonus',
       learnMore: 'Learn More',
     },
     slots: {
@@ -475,6 +637,60 @@ export const translations: Record<Language, Translations> = {
       low: 'Low',
       medium: 'Medium',
       high: 'High',
+    },
+    promo: {
+      title: 'Promotions and Bonuses',
+      firstDepositTitle: 'First Deposit Bonus',
+      firstDepositBonus: '200%',
+      firstDepositAmount: 'up to $10,000',
+      freespinsTitle: 'Daily Free Spins',
+      freespinsBonus: '50',
+      freespinsAmount: 'free spins',
+      cashbackTitle: 'Friday Cashback',
+      cashbackBonus: '10%',
+      cashbackAmount: 'on losses',
+    },
+    jackpot: {
+      title: 'Jackpots',
+      current: 'Current Jackpot',
+      winners: 'Today\'s Winners',
+    },
+    footer: {
+      about: 'About Us',
+      support: 'Support',
+      legal: 'Legal Information',
+      contactUs: 'Contact Us',
+      faq: 'FAQ',
+      terms: 'Terms of Use',
+      privacy: 'Privacy Policy',
+      responsible: 'Responsible Gaming',
+      copyright: '© 2025 1WIN Casino. All rights reserved. Play responsibly.',
+    },
+    allSlots: {
+      title: 'All Casino Slots',
+      found: 'Found',
+      of: 'of',
+      games: 'games',
+      search: 'Search',
+      searchPlaceholder: 'Slot name or provider...',
+      provider: 'Provider',
+      allProviders: 'All Providers',
+      category: 'Category',
+      allCategories: 'All Categories',
+      volatilityLabel: 'Volatility',
+      allVolatility: 'Any',
+      sortBy: 'Sort By',
+      popularity: 'By Popularity',
+      ratingSort: 'By Rating',
+      rtpSort: 'By RTP',
+      maxWinSort: 'By Max Win',
+      resetFilters: 'Reset Filters',
+      noResults: 'No slots found',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - Best Online Slots 2025 | Play For Real Money',
+      metaDescription: 'Official 1WIN Casino online offers over 5000 licensed slots from leading providers: Pragmatic Play, NetEnt, Play\'n GO. Generous bonuses up to 200% on first deposit, instant withdrawals, 24/7 support. Play verified slots with high RTP up to 98%, jackpots from $100,000. Demo mode available without registration. Secure payments, fair gaming, Curaçao license. Start winning today! Experience the thrill of top-rated casino games with exclusive promotions and massive progressive jackpots waiting for you.',
+      keywords: 'online casino, slot machines, slots for money, 1win casino, casino bonuses, jackpot, play slots, online gambling',
     },
   },
   en: {
@@ -512,9 +728,9 @@ export const translations: Record<Language, Translations> = {
       main: 'Home',
     },
     hero: {
-      title: 'Best Online Slots 2025',
-      subtitle: 'Play top slots from leading providers',
-      playButton: 'Start Playing',
+      title: 'Your Chance for a Big Win',
+      subtitle: 'Casino and Sports Betting • Over 10,000 Games • Fast Withdrawals',
+      playButton: 'Get 200% Bonus',
       learnMore: 'Learn More',
     },
     slots: {
@@ -590,6 +806,60 @@ export const translations: Record<Language, Translations> = {
       medium: 'Medium',
       high: 'High',
     },
+    promo: {
+      title: 'Promotions and Bonuses',
+      firstDepositTitle: 'First Deposit Bonus',
+      firstDepositBonus: '200%',
+      firstDepositAmount: 'up to $10,000',
+      freespinsTitle: 'Daily Free Spins',
+      freespinsBonus: '50',
+      freespinsAmount: 'free spins',
+      cashbackTitle: 'Friday Cashback',
+      cashbackBonus: '10%',
+      cashbackAmount: 'on losses',
+    },
+    jackpot: {
+      title: 'Jackpots',
+      current: 'Current Jackpot',
+      winners: 'Today\'s Winners',
+    },
+    footer: {
+      about: 'About Us',
+      support: 'Support',
+      legal: 'Legal Information',
+      contactUs: 'Contact Us',
+      faq: 'FAQ',
+      terms: 'Terms of Use',
+      privacy: 'Privacy Policy',
+      responsible: 'Responsible Gaming',
+      copyright: '© 2025 1WIN Casino. All rights reserved. Play responsibly.',
+    },
+    allSlots: {
+      title: 'All Casino Slots',
+      found: 'Found',
+      of: 'of',
+      games: 'games',
+      search: 'Search',
+      searchPlaceholder: 'Slot name or provider...',
+      provider: 'Provider',
+      allProviders: 'All Providers',
+      category: 'Category',
+      allCategories: 'All Categories',
+      volatilityLabel: 'Volatility',
+      allVolatility: 'Any',
+      sortBy: 'Sort By',
+      popularity: 'By Popularity',
+      ratingSort: 'By Rating',
+      rtpSort: 'By RTP',
+      maxWinSort: 'By Max Win',
+      resetFilters: 'Reset Filters',
+      noResults: 'No slots found',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - Best Online Slots 2025 | Play For Real Money',
+      metaDescription: 'Official 1WIN Casino brings you the ultimate online gaming experience with 5000+ premium slots from industry leaders: Pragmatic Play, NetEnt, Play\'n GO, and more. Claim your welcome bonus up to 200% on first deposit with instant payouts and round-the-clock customer support. Enjoy certified slots with exceptional RTP rates up to 98% and life-changing progressive jackpots starting at $100,000. Try free demo games without registration. Safe transactions, provably fair gaming, fully licensed by Curaçao Gaming Authority. Join thousands of winners today!',
+      keywords: 'online casino, slot machines, real money slots, 1win casino, casino bonuses, jackpot slots, online slots, gambling games',
+    },
   },
   uk: {
     common: {
@@ -626,9 +896,9 @@ export const translations: Record<Language, Translations> = {
       main: 'Головна',
     },
     hero: {
-      title: 'Кращі онлайн слоти 2025',
-      subtitle: 'Грайте в топові слоти від провідних провайдерів',
-      playButton: 'Почати гру',
+      title: 'Ваш шанс на великий виграш',
+      subtitle: 'Казино і ставки на спорт • Понад 10 000 ігор • Швидке виведення коштів',
+      playButton: 'Отримати бонус 200%',
       learnMore: 'Дізнатися більше',
     },
     slots: {
@@ -704,6 +974,60 @@ export const translations: Record<Language, Translations> = {
       medium: 'Середня',
       high: 'Висока',
     },
+    promo: {
+      title: 'Акції та бонуси',
+      firstDepositTitle: 'Бонус на перший депозит',
+      firstDepositBonus: '200%',
+      firstDepositAmount: 'до 50 000 ₴',
+      freespinsTitle: 'Фріспіни щодня',
+      freespinsBonus: '50',
+      freespinsAmount: 'безкоштовних обертань',
+      cashbackTitle: 'Кешбек по п\'ятницях',
+      cashbackBonus: '10%',
+      cashbackAmount: 'від програшів',
+    },
+    jackpot: {
+      title: 'Джекпоти',
+      current: 'Поточний джекпот',
+      winners: 'Переможці за сьогодні',
+    },
+    footer: {
+      about: 'Про нас',
+      support: 'Підтримка',
+      legal: 'Правова інформація',
+      contactUs: 'Зв\'язатися з нами',
+      faq: 'Часті питання',
+      terms: 'Умови використання',
+      privacy: 'Політика конфіденційності',
+      responsible: 'Відповідальна гра',
+      copyright: '© 2025 1WIN Casino. Всі права захищені. Грайте відповідально.',
+    },
+    allSlots: {
+      title: 'Всі слоти казино',
+      found: 'Знайдено',
+      of: 'з',
+      games: 'ігор',
+      search: 'Пошук',
+      searchPlaceholder: 'Назва слота або провайдер...',
+      provider: 'Провайдер',
+      allProviders: 'Всі провайдери',
+      category: 'Категорія',
+      allCategories: 'Всі категорії',
+      volatilityLabel: 'Волатильність',
+      allVolatility: 'Будь-яка',
+      sortBy: 'Сортування',
+      popularity: 'За популярністю',
+      ratingSort: 'За рейтингом',
+      rtpSort: 'За RTP',
+      maxWinSort: 'За макс. виграшем',
+      resetFilters: 'Скинути фільтри',
+      noResults: 'Слоти не знайдені',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - Кращі ігрові слоти онлайн 2025 | Грати на гроші',
+      metaDescription: 'Офіційне онлайн-казино 1WIN пропонує понад 5000 ліцензованих слотів від провідних провайдерів: Pragmatic Play, NetEnt, Play\'n GO. Щедрі бонуси до 200% на перший депозит, миттєве виведення виграшів, цілодобова підтримка. Грайте в перевірені слоти з високим RTP до 98%, джекпоти від 500 000 ₴. Демо-режим доступний без реєстрації. Безпечні платежі, чесна гра, ліцензія Кюрасао. Почніть вигравати вже сьогодні! Ексклюзивні пропозиції для українських гравців з швидкими виплатами.',
+      keywords: 'онлайн казино, ігрові автомати, слоти на гроші, казино 1win, бонуси казино, джекпот, грати в слоти, азартні ігри',
+    },
   },
   hi: {
     common: {
@@ -740,9 +1064,9 @@ export const translations: Record<Language, Translations> = {
       main: 'होम',
     },
     hero: {
-      title: 'सर्वश्रेष्ठ ऑनलाइन स्लॉट्स 2025',
-      subtitle: 'प्रमुख प्रदाताओं से शीर्ष स्लॉट खेलें',
-      playButton: 'खेलना शुरू करें',
+      title: 'बड़ी जीत का आपका मौका',
+      subtitle: 'कैसीनो और स्पोर्ट्स बेटिंग • 10,000 से अधिक गेम • तेज़ निकासी',
+      playButton: '200% बोनस प्राप्त करें',
       learnMore: 'और जानें',
     },
     slots: {
@@ -818,6 +1142,60 @@ export const translations: Record<Language, Translations> = {
       medium: 'मध्यम',
       high: 'उच्च',
     },
+    promo: {
+      title: 'प्रमोशन और बोनस',
+      firstDepositTitle: 'पहली डिपॉजिट बोनस',
+      firstDepositBonus: '200%',
+      firstDepositAmount: '₹100,000 तक',
+      freespinsTitle: 'दैनिक फ्री स्पिन',
+      freespinsBonus: '50',
+      freespinsAmount: 'मुफ्त स्पिन',
+      cashbackTitle: 'शुक्रवार कैशबैक',
+      cashbackBonus: '10%',
+      cashbackAmount: 'नुकसान पर',
+    },
+    jackpot: {
+      title: 'जैकपॉट',
+      current: 'वर्तमान जैकपॉट',
+      winners: 'आज के विजेता',
+    },
+    footer: {
+      about: 'हमारे बारे में',
+      support: 'सहायता',
+      legal: 'कानूनी जानकारी',
+      contactUs: 'हमसे संपर्क करें',
+      faq: 'अक्सर पूछे जाने वाले प्रश्न',
+      terms: 'उपयोग की शर्तें',
+      privacy: 'गोपनीयता नीति',
+      responsible: 'जिम्मेदार गेमिंग',
+      copyright: '© 2025 1WIN Casino. सर्वाधिकार सुरक्षित। जिम्मेदारी से खेलें।',
+    },
+    allSlots: {
+      title: 'सभी कैसीनो स्लॉट्स',
+      found: 'मिले',
+      of: 'में से',
+      games: 'गेम',
+      search: 'खोजें',
+      searchPlaceholder: 'स्लॉट का नाम या प्रदाता...',
+      provider: 'प्रदाता',
+      allProviders: 'सभी प्रदाता',
+      category: 'श्रेणी',
+      allCategories: 'सभी श्रेणियां',
+      volatilityLabel: 'अस्थिरता',
+      allVolatility: 'कोई भी',
+      sortBy: 'क्रमबद्ध करें',
+      popularity: 'लोकप्रियता के अनुसार',
+      ratingSort: 'रेटिंग के अनुसार',
+      rtpSort: 'RTP के अनुसार',
+      maxWinSort: 'अधिकतम जीत के अनुसार',
+      resetFilters: 'फ़िल्टर रीसेट करें',
+      noResults: 'कोई स्लॉट नहीं मिला',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - सर्वश्रेष्ठ ऑनलाइन स्लॉट्स 2025 | असली पैसे के लिए खेलें',
+      metaDescription: 'आधिकारिक 1WIN Casino ऑनलाइन प्रमुख प्रदाताओं से 5000+ लाइसेंस प्राप्त स्लॉट प्रदान करता है: Pragmatic Play, NetEnt, Play\'n GO। पहली जमा पर 200% तक उदार बोनस, तत्काल निकासी, 24/7 सहायता। 98% तक उच्च RTP वाले सत्यापित स्लॉट खेलें, ₹1,000,000 से शुरू होने वाले जैकपॉट। बिना पंजीकरण के डेमो मोड उपलब्ध। सुरक्षित भुगतान, निष्पक्ष गेमिंग, Curaçao लाइसेंस। आज ही जीतना शुरू करें! भारतीय खिलाड़ियों के लिए विशेष प्रमोशन, UPI और स्थानीय भुगतान विधियों के साथ।',
+      keywords: 'ऑनलाइन कैसीनो, स्लॉट मशीन, पैसे के लिए स्लॉट, 1win कैसीनो, कैसीनो बोनस, जैकपॉट, स्लॉट खेलें, ऑनलाइन जुआ',
+    },
   },
   fa: {
     common: {
@@ -854,9 +1232,9 @@ export const translations: Record<Language, Translations> = {
       main: 'خانه',
     },
     hero: {
-      title: 'بهترین اسلات‌های آنلاین 2025',
-      subtitle: 'اسلات‌های برتر را از ارائه‌دهندگان پیشرو بازی کنید',
-      playButton: 'شروع بازی',
+      title: 'شانس شما برای برد بزرگ',
+      subtitle: 'کازینو و شرط‌بندی ورزشی • بیش از 10,000 بازی • برداشت سریع',
+      playButton: 'دریافت پاداش 200%',
       learnMore: 'بیشتر بدانید',
     },
     slots: {
@@ -932,6 +1310,60 @@ export const translations: Record<Language, Translations> = {
       medium: 'متوسط',
       high: 'زیاد',
     },
+    promo: {
+      title: 'پیشنهادات و پاداش‌ها',
+      firstDepositTitle: 'پاداش اولین واریز',
+      firstDepositBonus: '200%',
+      firstDepositAmount: 'تا 10,000,000 ﷼',
+      freespinsTitle: 'چرخش‌های رایگان روزانه',
+      freespinsBonus: '50',
+      freespinsAmount: 'چرخش رایگان',
+      cashbackTitle: 'بازگشت وجه جمعه‌ها',
+      cashbackBonus: '10%',
+      cashbackAmount: 'از باخت‌ها',
+    },
+    jackpot: {
+      title: 'جکپات‌ها',
+      current: 'جکپات فعلی',
+      winners: 'برندگان امروز',
+    },
+    footer: {
+      about: 'درباره ما',
+      support: 'پشتیبانی',
+      legal: 'اطلاعات حقوقی',
+      contactUs: 'تماس با ما',
+      faq: 'سوالات متداول',
+      terms: 'شرایط استفاده',
+      privacy: 'سیاست حفظ حریم خصوصی',
+      responsible: 'بازی مسئولانه',
+      copyright: '© 2025 1WIN Casino. تمامی حقوق محفوظ است. مسئولانه بازی کنید.',
+    },
+    allSlots: {
+      title: 'همه اسلات‌های کازینو',
+      found: 'یافت شد',
+      of: 'از',
+      games: 'بازی',
+      search: 'جستجو',
+      searchPlaceholder: 'نام اسلات یا ارائه‌دهنده...',
+      provider: 'ارائه‌دهنده',
+      allProviders: 'همه ارائه‌دهندگان',
+      category: 'دسته‌بندی',
+      allCategories: 'همه دسته‌بندی‌ها',
+      volatilityLabel: 'نوسان',
+      allVolatility: 'هر کدام',
+      sortBy: 'مرتب‌سازی',
+      popularity: 'بر اساس محبوبیت',
+      ratingSort: 'بر اساس امتیاز',
+      rtpSort: 'بر اساس RTP',
+      maxWinSort: 'بر اساس حداکثر برد',
+      resetFilters: 'بازنشانی فیلترها',
+      noResults: 'اسلاتی یافت نشد',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - بهترین اسلات‌های آنلاین 2025 | بازی با پول واقعی',
+      metaDescription: 'کازینوی آنلاین رسمی 1WIN بیش از 5000 اسلات دارای مجوز از ارائه‌دهندگان پیشرو ارائه می‌دهد: Pragmatic Play، NetEnt، Play\'n GO. پاداش‌های سخاوتمندانه تا 200% برای اولین واریز، برداشت فوری، پشتیبانی 24/7. اسلات‌های تایید شده با RTP بالا تا 98%، جکپات‌های بیش از 10,000,000 ﷼ را بازی کنید. حالت دمو بدون ثبت‌نام در دسترس است. پرداخت‌های امن، بازی منصفانه، مجوز Curaçao. همین امروز شروع به برد کنید! پیشنهادات ویژه برای بازیکنان ایرانی.',
+      keywords: 'کازینو آنلاین, ماشین اسلات, اسلات با پول, کازینو 1win, پاداش کازینو, جکپات, بازی اسلات, قمار آنلاین',
+    },
   },
   ja: {
     common: {
@@ -968,9 +1400,9 @@ export const translations: Record<Language, Translations> = {
       main: 'ホーム',
     },
     hero: {
-      title: 'ベストオンラインスロット2025',
-      subtitle: '一流プロバイダーのトップスロットをプレイ',
-      playButton: 'プレイ開始',
+      title: '大勝利のチャンス',
+      subtitle: 'カジノとスポーツベッティング • 10,000以上のゲーム • 高速出金',
+      playButton: '200%ボーナスを獲得',
       learnMore: '詳細を見る',
     },
     slots: {
@@ -1046,6 +1478,60 @@ export const translations: Record<Language, Translations> = {
       medium: '中',
       high: '高',
     },
+    promo: {
+      title: 'プロモーションとボーナス',
+      firstDepositTitle: '初回入金ボーナス',
+      firstDepositBonus: '200%',
+      firstDepositAmount: '最大¥100,000',
+      freespinsTitle: '毎日フリースピン',
+      freespinsBonus: '50',
+      freespinsAmount: 'フリースピン',
+      cashbackTitle: '金曜日キャッシュバック',
+      cashbackBonus: '10%',
+      cashbackAmount: '損失の',
+    },
+    jackpot: {
+      title: 'ジャックポット',
+      current: '現在のジャックポット',
+      winners: '本日の当選者',
+    },
+    footer: {
+      about: '当サイトについて',
+      support: 'サポート',
+      legal: '法的情報',
+      contactUs: 'お問い合わせ',
+      faq: 'よくある質問',
+      terms: '利用規約',
+      privacy: 'プライバシーポリシー',
+      responsible: '責任あるゲーミング',
+      copyright: '© 2025 1WIN Casino. 全著作権所有。責任を持ってプレイしてください。',
+    },
+    allSlots: {
+      title: '全カジノスロット',
+      found: '見つかりました',
+      of: '/',
+      games: 'ゲーム',
+      search: '検索',
+      searchPlaceholder: 'スロット名またはプロバイダー...',
+      provider: 'プロバイダー',
+      allProviders: '全プロバイダー',
+      category: 'カテゴリー',
+      allCategories: '全カテゴリー',
+      volatilityLabel: 'ボラティリティ',
+      allVolatility: 'すべて',
+      sortBy: '並び替え',
+      popularity: '人気順',
+      ratingSort: '評価順',
+      rtpSort: 'RTP順',
+      maxWinSort: '最大配当順',
+      resetFilters: 'フィルターをリセット',
+      noResults: 'スロットが見つかりません',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - ベストオンラインスロット2025 | リアルマネーでプレイ',
+      metaDescription: '公式1WIN Casinoオンラインは、業界をリードするプロバイダーから5000以上のライセンス取得済みスロットを提供：Pragmatic Play、NetEnt、Play\'n GO。初回入金で最大200%の豪華ボーナス、即時出金、24時間365日のサポート。最大98%の高いRTPを誇る認定スロットをプレイし、¥10,000,000からのジャックポットを獲得。登録不要のデモモードも利用可能。安全な決済、公正なゲーム、Curaçaoライセンス取得済み。今すぐ勝利を始めましょう！日本のプレイヤー向け特別プロモーション実施中。',
+      keywords: 'オンラインカジノ, スロットマシン, リアルマネースロット, 1winカジノ, カジノボーナス, ジャックポット, オンラインスロット, ギャンブルゲーム',
+    },
   },
   'en-au': {
     common: {
@@ -1082,9 +1568,9 @@ export const translations: Record<Language, Translations> = {
       main: 'Home',
     },
     hero: {
-      title: 'Best Online Pokies 2025',
-      subtitle: 'Play top pokies from leading providers',
-      playButton: 'Start Playing',
+      title: 'Your Chance for a Big Win',
+      subtitle: 'Casino and Sports Betting • Over 10,000 Games • Fast Withdrawals',
+      playButton: 'Get 200% Bonus',
       learnMore: 'Learn More',
     },
     slots: {
@@ -1159,6 +1645,60 @@ export const translations: Record<Language, Translations> = {
       low: 'Low',
       medium: 'Medium',
       high: 'High',
+    },
+    promo: {
+      title: 'Promotions and Bonuses',
+      firstDepositTitle: 'First Deposit Bonus',
+      firstDepositBonus: '200%',
+      firstDepositAmount: 'up to $10,000',
+      freespinsTitle: 'Daily Free Spins',
+      freespinsBonus: '50',
+      freespinsAmount: 'free spins',
+      cashbackTitle: 'Friday Cashback',
+      cashbackBonus: '10%',
+      cashbackAmount: 'on losses',
+    },
+    jackpot: {
+      title: 'Jackpots',
+      current: 'Current Jackpot',
+      winners: 'Today\'s Winners',
+    },
+    footer: {
+      about: 'About Us',
+      support: 'Support',
+      legal: 'Legal Information',
+      contactUs: 'Contact Us',
+      faq: 'FAQ',
+      terms: 'Terms of Use',
+      privacy: 'Privacy Policy',
+      responsible: 'Responsible Gaming',
+      copyright: '© 2025 1WIN Casino. All rights reserved. Play responsibly.',
+    },
+    allSlots: {
+      title: 'All Casino Pokies',
+      found: 'Found',
+      of: 'of',
+      games: 'games',
+      search: 'Search',
+      searchPlaceholder: 'Pokie name or provider...',
+      provider: 'Provider',
+      allProviders: 'All Providers',
+      category: 'Category',
+      allCategories: 'All Categories',
+      volatilityLabel: 'Volatility',
+      allVolatility: 'Any',
+      sortBy: 'Sort By',
+      popularity: 'By Popularity',
+      ratingSort: 'By Rating',
+      rtpSort: 'By RTP',
+      maxWinSort: 'By Max Win',
+      resetFilters: 'Reset Filters',
+      noResults: 'No pokies found',
+    },
+    seo: {
+      metaTitle: '1WIN Casino - Best Online Pokies 2025 | Play For Real Money',
+      metaDescription: 'G\'day mate! Official 1WIN Casino Australia offers 5000+ licensed pokies from top providers: Pragmatic Play, NetEnt, Play\'n GO. Score ripper bonuses up to 200% on your first deposit with instant withdrawals and 24/7 support. Play certified pokies with high RTP up to 98% and progressive jackpots from $100,000. Free demo mode available, no registration needed. Secure payments with Aussie-friendly methods, fair dinkum gaming, Curaçao licensed. Start winning today! Exclusive bonuses for Australian players with lightning-fast payouts. Fair go guaranteed!',
+      keywords: 'online casino australia, pokies online, real money pokies, 1win casino, casino bonuses, jackpot pokies, online gambling australia',
     },
   },
 };

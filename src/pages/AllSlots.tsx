@@ -15,6 +15,7 @@ import Icon from '@/components/ui/icon';
 import { slots } from '@/data/slots';
 import { useLanguage } from '@/i18n/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import SEOHead from '@/components/SEOHead';
 
 const AllSlots = () => {
   const navigate = useNavigate();
@@ -60,7 +61,9 @@ const AllSlots = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1F2937]">
+    <>
+      <SEOHead />
+      <div className="min-h-screen bg-[#1F2937]">
       <header className="bg-[#111827] border-b border-[#374151] sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -294,7 +297,8 @@ const AllSlots = () => {
           <p className="text-sm">18+ | Играйте ответственно</p>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ import { getDemoUrl, hasDemo } from '@/utils/getDemoUrl';
 import { casinos, Casino } from '@/data/casinos';
 import { useLanguage } from '@/i18n/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import SEOHead from '@/components/SEOHead';
 
 const SlotDetail = () => {
   const { id } = useParams();
@@ -39,6 +40,7 @@ const SlotDetail = () => {
 
   return (
     <>
+      <SEOHead />
       {isDemoPlaying && hasDemo(slot) && (
         <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
           <div className="w-full h-full relative flex flex-col">

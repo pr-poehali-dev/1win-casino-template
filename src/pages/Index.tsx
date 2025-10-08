@@ -10,6 +10,7 @@ import Icon from '@/components/ui/icon';
 import { slots } from '@/data/slots';
 import { useLanguage } from '@/i18n/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import SEOHead from '@/components/SEOHead';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -39,9 +40,9 @@ const Index = () => {
   const displaySlots = slots.slice(0, 12);
 
   const promos = [
-    { title: 'Бонус на первый депозит', bonus: '200%', amount: 'до 100 000 ₽' },
-    { title: 'Фриспины каждый день', bonus: '50', amount: 'бесплатных вращений' },
-    { title: 'Кэшбэк по пятницам', bonus: '10%', amount: 'от проигрышей' },
+    { title: t.promo.firstDepositTitle, bonus: t.promo.firstDepositBonus, amount: t.promo.firstDepositAmount },
+    { title: t.promo.freespinsTitle, bonus: t.promo.freespinsBonus, amount: t.promo.freespinsAmount },
+    { title: t.promo.cashbackTitle, bonus: t.promo.cashbackBonus, amount: t.promo.cashbackAmount },
   ];
 
   const jackpots = [
@@ -88,7 +89,9 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1F2937]">
+    <>
+      <SEOHead />
+      <div className="min-h-screen bg-[#1F2937]">
       <header className="bg-[#111827] border-b border-[#374151] sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -144,13 +147,10 @@ const Index = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-                Ваш шанс на{' '}
-                <span className="bg-gradient-to-r from-[#F59E0B] to-[#EF4444] bg-clip-text text-transparent">
-                  большой выигрыш
-                </span>
+                {t.hero.title}
               </h2>
               <p className="text-xl text-gray-300 mb-8 animate-fade-in">
-                Казино и ставки на спорт • Более 10 000 игр • Быстрый вывод средств
+                {t.hero.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
                 <Button
@@ -158,7 +158,7 @@ const Index = () => {
                   size="lg"
                   className="bg-gradient-to-r from-[#F59E0B] to-[#EF4444] hover:opacity-90 text-black font-bold text-lg px-8 py-6 animate-glow"
                 >
-                  Получить бонус 200%
+                  {t.hero.playButton}
                 </Button>
                 <Button
                   size="lg"
@@ -166,22 +166,22 @@ const Index = () => {
                   className="border-[#10B981] text-[#10B981] hover:bg-[#10B981] hover:text-black font-semibold text-lg px-8 py-6"
                 >
                   <Icon name="PlayCircle" className="mr-2" size={20} />
-                  Демо-режим
+                  {t.common.demo}
                 </Button>
               </div>
 
               <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#F59E0B] mb-2">10K+</div>
-                  <div className="text-sm text-gray-400">Игр</div>
+                  <div className="text-sm text-gray-400">{t.allSlots.games}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#F59E0B] mb-2">24/7</div>
-                  <div className="text-sm text-gray-400">Поддержка</div>
+                  <div className="text-sm text-gray-400">{t.footer.support}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#F59E0B] mb-2">1 мин</div>
-                  <div className="text-sm text-gray-400">Вывод</div>
+                  <div className="text-3xl font-bold text-[#F59E0B] mb-2">1 {t.casino.min}</div>
+                  <div className="text-sm text-gray-400">{t.casino.withdrawalTime}</div>
                 </div>
               </div>
             </div>
@@ -193,7 +193,7 @@ const Index = () => {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-2xl font-bold flex items-center gap-2">
                 <span className="text-3xl">🎰</span>
-                Джекпоты сейчас
+                {t.jackpot.title}
               </h3>
             </div>
             <div className="relative h-24 overflow-hidden">
@@ -486,8 +486,8 @@ const Index = () => {
 
       <footer className="bg-[#111827] border-t border-[#374151] py-8">
         <div className="container mx-auto px-4 text-center text-gray-400">
-          <p className="mb-2">© 2025 1WIN Casino. Все права защищены.</p>
-          <p className="text-sm">18+ | Играйте ответственно</p>
+          <p className="mb-2">{t.footer.copyright}</p>
+          <p className="text-sm">18+ | {t.footer.responsible}</p>
         </div>
       </footer>
 
@@ -560,7 +560,8 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+      </div>
+    </>
   );
 };
 
