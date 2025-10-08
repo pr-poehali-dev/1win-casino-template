@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -6,8 +7,10 @@ import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
+import { slots } from '@/data/slots';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Главная');
@@ -19,17 +22,7 @@ const Index = () => {
   const [messageInput, setMessageInput] = useState('');
 
   const navItems = ['Главная', 'Казино', 'Слоты', 'Live', 'Спорт', 'Промо'];
-
-  const games = [
-    { id: 1, title: 'Book of Ra', category: 'Слоты', image: '🎰' },
-    { id: 2, title: 'Lucky Lady', category: 'Слоты', image: '💎' },
-    { id: 3, title: 'Blackjack', category: 'Live', image: '🃏' },
-    { id: 4, title: 'Roulette', category: 'Live', image: '🎡' },
-    { id: 5, title: 'Mega Fortune', category: 'Казино', image: '💰' },
-    { id: 6, title: 'Starburst', category: 'Слоты', image: '⭐' },
-    { id: 7, title: 'Football Bets', category: 'Спорт', image: '⚽' },
-    { id: 8, title: 'Basketball', category: 'Спорт', image: '🏀' },
-  ];
+  const displaySlots = slots.slice(0, 12);
 
   const promos = [
     { title: 'Бонус на первый депозит', bonus: '200%', amount: 'до 100 000 ₽' },
@@ -277,23 +270,39 @@ const Index = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {games.map((game) => (
+              {displaySlots.map((slot) => (
                 <Card
-                  key={game.id}
+                  key={slot.id}
+                  onClick={() => navigate(`/slot/${slot.id}`)}
                   className="bg-[#1F2937] border-[#374151] hover:border-[#F59E0B] transition-all group cursor-pointer overflow-hidden"
                 >
                   <div className="aspect-square bg-gradient-to-br from-[#374151] to-[#1F2937] flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">
-                    {game.image}
+                    {slot.emoji}
                   </div>
                   <div className="p-4">
-                    <h4 className="font-semibold mb-1">{game.title}</h4>
-                    <p className="text-sm text-gray-400 mb-3">{game.category}</p>
+                    <h4 className="font-semibold mb-1 truncate">{slot.title}</h4>
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-sm text-gray-400">{slot.provider}</p>
+                      <div className="flex items-center gap-1">
+                        <Icon name="Star" size={14} className="text-[#F59E0B] fill-[#F59E0B]" />
+                        <span className="text-sm">{slot.rating}</span>
+                      </div>
+                    </div>
                     <Button className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-semibold">
                       Играть
                     </Button>
                   </div>
                 </Card>
               ))}
+            </div>
+            <div className="text-center mt-8">
+              <p className="text-gray-400 mb-4">Показано 12 из {slots.length} игр</p>
+              <Button
+                variant="outline"
+                className="border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-black px-8"
+              >
+                Показать все слоты
+              </Button>
             </div>
           </div>
         </section>
