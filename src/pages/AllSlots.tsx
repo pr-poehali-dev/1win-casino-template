@@ -13,9 +13,12 @@ import {
 } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
 import { slots } from '@/data/slots';
+import { useLanguage } from '@/i18n/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const AllSlots = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProvider, setSelectedProvider] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -68,13 +71,14 @@ const AllSlots = () => {
               1WIN
             </button>
             <div className="flex items-center gap-3">
+              <LanguageSwitcher />
               <Button
                 onClick={() => navigate('/')}
                 variant="outline"
                 className="border-[#374151] hover:bg-[#374151]"
               >
                 <Icon name="Home" size={20} className="mr-2" />
-                Главная
+                {t.header.main}
               </Button>
             </div>
           </div>

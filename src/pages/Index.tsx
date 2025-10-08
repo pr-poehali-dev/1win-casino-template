@@ -8,20 +8,23 @@ import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { slots } from '@/data/slots';
+import { useLanguage } from '@/i18n/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const Index = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('Главная');
+  const [activeSection, setActiveSection] = useState(t.nav.main);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [currentJackpot, setCurrentJackpot] = useState(0);
   const [chatMessages, setChatMessages] = useState([
-    { id: 1, sender: 'support', text: 'Здравствуйте! Чем могу помочь?' },
+    { id: 1, sender: 'support', text: t.chat.greeting },
   ]);
   const [messageInput, setMessageInput] = useState('');
 
-  const navItems = ['Главная', 'Казино', 'Слоты', 'Live', 'Спорт', 'Промо'];
+  const navItems = [t.nav.main, t.nav.casino, t.nav.slots, t.nav.live, t.nav.sport, t.nav.promo];
   const displaySlots = slots.slice(0, 12);
 
   const promos = [
@@ -104,18 +107,19 @@ const Index = () => {
             </div>
 
             <div className="flex items-center gap-3">
+              <LanguageSwitcher />
               <Button
                 variant="outline"
                 onClick={() => setIsLoginOpen(true)}
                 className="border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-black"
               >
-                Вход
+                {t.auth.login}
               </Button>
               <Button
                 onClick={() => setIsRegisterOpen(true)}
                 className="bg-gradient-to-r from-[#F59E0B] to-[#EF4444] hover:opacity-90 text-black font-semibold"
               >
-                Регистрация
+                {t.auth.register}
               </Button>
             </div>
           </div>
