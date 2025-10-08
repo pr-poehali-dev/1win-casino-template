@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Главная');
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [currentJackpot, setCurrentJackpot] = useState(0);
+  const [chatMessages, setChatMessages] = useState([
+    { id: 1, sender: 'support', text: 'Здравствуйте! Чем могу помочь?' },
+  ]);
+  const [messageInput, setMessageInput] = useState('');
 
   const navItems = ['Главная', 'Казино', 'Слоты', 'Live', 'Спорт', 'Промо'];
 
@@ -29,6 +36,49 @@ const Index = () => {
     { title: 'Фриспины каждый день', bonus: '50', amount: 'бесплатных вращений' },
     { title: 'Кэшбэк по пятницам', bonus: '10%', amount: 'от проигрышей' },
   ];
+
+  const jackpots = [
+    { id: 1, name: 'Mega Moolah', amount: 12547893, emoji: '💰' },
+    { id: 2, name: 'Divine Fortune', amount: 3245678, emoji: '👑' },
+    { id: 3, name: 'Hall of Gods', amount: 5678234, emoji: '⚡' },
+    { id: 4, name: 'Arabian Nights', amount: 2345123, emoji: '🧞' },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentJackpot((prev) => (prev + 1) % jackpots.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatJackpot = (amount: number) => {
+    return new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const sendMessage = () => {
+    if (!messageInput.trim()) return;
+    const newMessage = {
+      id: chatMessages.length + 1,
+      sender: 'user',
+      text: messageInput,
+    };
+    setChatMessages([...chatMessages, newMessage]);
+    setMessageInput('');
+    setTimeout(() => {
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          sender: 'support',
+          text: 'Спасибо за ваш вопрос! Наш специалист ответит в течение минуты.',
+        },
+      ]);
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-[#1F2937]">
@@ -120,6 +170,63 @@ const Index = () => {
                   <div className="text-sm text-gray-400">Вывод</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-8 bg-[#111827] border-y border-[#374151] overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-2xl font-bold flex items-center gap-2">
+                <span className="text-3xl">🎰</span>
+                Джекпоты сейчас
+              </h3>
+            </div>
+            <div className="relative h-24 overflow-hidden">
+              {jackpots.map((jackpot, index) => (
+                <div
+                  key={jackpot.id}
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    currentJackpot === index
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-4'
+                  }`}
+                >
+                  <Card className="bg-gradient-to-r from-[#F59E0B] via-[#EF4444] to-[#F59E0B] border-0 p-6 animate-glow">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <span className="text-5xl">{jackpot.emoji}</span>
+                        <div>
+                          <h4 className="text-xl font-bold text-black">{jackpot.name}</h4>
+                          <p className="text-sm text-black/80">Прогрессивный джекпот</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-4xl font-bold text-black tabular-nums">
+                          {formatJackpot(jackpot.amount)}
+                        </div>
+                        <Button
+                          size="sm"
+                          className="mt-2 bg-black hover:bg-black/80 text-[#F59E0B] font-semibold"
+                        >
+                          Играть сейчас
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-center gap-2 mt-4">
+              {jackpots.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentJackpot(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    currentJackpot === index ? 'bg-[#F59E0B] w-8' : 'bg-gray-600'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -219,6 +326,132 @@ const Index = () => {
           </div>
         </section>
       </main>
+
+      <button
+        onClick={() => setIsChatOpen(true)}
+        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-[#F59E0B] to-[#EF4444] rounded-full shadow-lg hover:scale-110 transition-transform z-50 flex items-center justify-center animate-glow"
+      >
+        <Icon name="MessageCircle" size={28} className="text-black" />
+      </button>
+
+      <Dialog open={isChatOpen} onOpenChange={setIsChatOpen}>
+        <DialogContent className="bg-[#1F2937] border-[#374151] max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-[#F59E0B] flex items-center gap-2">
+              <Icon name="Headphones" size={24} />
+              Поддержка 24/7
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="h-80 overflow-y-auto space-y-3 p-4 bg-[#111827] rounded-lg">
+              {chatMessages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[80%] p-3 rounded-lg ${
+                      msg.sender === 'user'
+                        ? 'bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-black'
+                        : 'bg-[#374151] text-white'
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <Textarea
+                value={messageInput}
+                onChange={(e) => setMessageInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                  }
+                }}
+                placeholder="Напишите ваш вопрос..."
+                className="bg-[#111827] border-[#374151] resize-none"
+                rows={2}
+              />
+              <Button
+                onClick={sendMessage}
+                className="bg-gradient-to-r from-[#F59E0B] to-[#EF4444] hover:opacity-90 text-black font-semibold"
+              >
+                <Icon name="Send" size={20} />
+              </Button>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-400">
+              <div className="w-2 h-2 bg-[#10B981] rounded-full animate-pulse"></div>
+              Онлайн • Обычно отвечаем за 1 минуту
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <button
+        onClick={() => setIsChatOpen(true)}
+        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-[#F59E0B] to-[#EF4444] rounded-full shadow-lg hover:scale-110 transition-transform z-50 flex items-center justify-center animate-glow"
+      >
+        <Icon name="MessageCircle" size={28} className="text-black" />
+      </button>
+
+      <Dialog open={isChatOpen} onOpenChange={setIsChatOpen}>
+        <DialogContent className="bg-[#1F2937] border-[#374151] max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-[#F59E0B] flex items-center gap-2">
+              <Icon name="Headphones" size={24} />
+              Поддержка 24/7
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="h-80 overflow-y-auto space-y-3 p-4 bg-[#111827] rounded-lg">
+              {chatMessages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[80%] p-3 rounded-lg ${
+                      msg.sender === 'user'
+                        ? 'bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-black'
+                        : 'bg-[#374151] text-white'
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <Textarea
+                value={messageInput}
+                onChange={(e) => setMessageInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                  }
+                }}
+                placeholder="Напишите ваш вопрос..."
+                className="bg-[#111827] border-[#374151] resize-none"
+                rows={2}
+              />
+              <Button
+                onClick={sendMessage}
+                className="bg-gradient-to-r from-[#F59E0B] to-[#EF4444] hover:opacity-90 text-black font-semibold"
+              >
+                <Icon name="Send" size={20} />
+              </Button>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-400">
+              <div className="w-2 h-2 bg-[#10B981] rounded-full animate-pulse"></div>
+              Онлайн • Обычно отвечаем за 1 минуту
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <footer className="bg-[#111827] border-t border-[#374151] py-8">
         <div className="container mx-auto px-4 text-center text-gray-400">
